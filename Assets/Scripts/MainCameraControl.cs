@@ -11,9 +11,12 @@ public class MainCameraControl : MonoBehaviour {
     //カメラダミー横方向取得
     private Vector3 CameraRight = new Vector3(0.0f, 0.0f, 0.0f);
 
-    private float stageRiseY = 0.0f;
-    public float stageRiseAddY = 1.5f;
-    public float stageRiseRotateY = 1.5f;
+    private float stageRiseY = 0.0f;        //地面のY座標
+    public float stageRiseAddY = 1.5f;      //地面からの高さ
+    public float stageRiseRotateY = 1.5f;   //傾きの値
+    public float CameraDownDirection = 1.0f;    //プレイヤーからズラすカメラの距離
+
+    private Vector3 cameraPosPrevious = new Vector3(0.0f, 0.0f, 0.0f);
 
     //プレイヤー情報取得
     PlayerMove player;
@@ -55,6 +58,7 @@ public class MainCameraControl : MonoBehaviour {
         cameraPos -= cameraDistance / 5.0f * CameraForward;
         //cameraPos.y -= swingingCameraYposDown ;
 
+        //カメラの傾き調整
         CameraRotate = cameraDammyObj.transform.localEulerAngles;
 
         float rad = cameraDammyObj.transform.position.y - transform.position.y;
@@ -64,15 +68,21 @@ public class MainCameraControl : MonoBehaviour {
         transform.localEulerAngles = CameraRotate;
 
 
-
+        //カメラの高さ調整
         RaycastHit floorHit;
-
+        // float overDistance = 0.0f;
         if (Physics.Raycast(cameraPos, rayDirection, out floorHit, LayerMask.GetMask("Stage")))
         {
 
-            stageRiseY = floorHit.point.y + stageRiseAddY;
-
+            stageRiseY = floorHit.point.y + 1.5f;
+            if (player.transform.position.y - CameraDownDirection > stageRiseY) stageRiseY = player.transform.position.y - CameraDownDirection;
         }
+        else
+        {
+            stageRiseY = player.transform.position.y - CameraDownDirection;
+        }
+           
+
          cameraPos.y = stageRiseY;
 
         transform.position = cameraPos;
@@ -92,9 +102,17 @@ public class MainCameraControl : MonoBehaviour {
         }
  
         cameraPos = transform.position;
-       
-        transform.position = cameraPos;
+/*
+        if (transform.position.y - player.transform.position.y > Mathf.Abs(0.8f))
+        {
+            cameraPos.y = cameraPosPrevious.y;
+        } 
+        */
+            transform.position = cameraPos;
 
+        cameraPosPrevious = transform.position;
+
+        
 
     }
 }
