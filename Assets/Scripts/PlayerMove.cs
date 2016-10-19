@@ -70,9 +70,13 @@ public class PlayerMove : MonoBehaviour {
 
         }
         //一番近い敵
-      targetEnemy = nearEnemySearch();
-        targetEnemy.GetComponent<EnemyMove>().colNum = 1;
-        targetMaker.transform.position =Camera.main.WorldToScreenPoint(targetEnemy.transform.position);
+        if(flagsInStageManager.batleMode == true)
+        {
+            targetEnemy = nearEnemySearch();
+            targetEnemy.GetComponent<EnemyMove>().colNum = 1;
+            targetMaker.transform.position = Camera.main.WorldToScreenPoint(targetEnemy.transform.position);
+        }
+  
     }
     void FixedUpdate()
     {

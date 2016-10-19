@@ -18,11 +18,11 @@ public class FlagsInStageManager : MonoBehaviour {
     public float matchTime = 0.0f;
     public float matchNowTimeCount = 0.0f;
     public Vector3 matchStartPos = new Vector3(0.0f, 0.0f, 0.0f);
-
- //   Button Button1;
+    public bool batleMode = false;
+    //   Button Button1;
 
     private bool startTrigger = false;
-
+    
     int gamecounter = 0;
 
     public string gameOverChangeSceneName;
