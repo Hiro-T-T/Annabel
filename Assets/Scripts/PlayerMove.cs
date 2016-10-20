@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour {
         isPlayerController = gameObject.GetComponent<CharacterController>();
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         animator = GetComponent<Animator>();
-        targetMakerObj = Resources.Load("Prefab/CanvasTarget/Target") as GameObject;
+        targetMakerObj = Resources.Load("CanvasTarget/Target") as GameObject;
         
    
      
