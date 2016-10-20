@@ -6,6 +6,8 @@ public class MainCameraControl : MonoBehaviour {
 
     CameraControl cameraDammyObj;
 
+    FlagsInStageManager flagsInStageManager;
+
     //カメラダミー正面方向取得
     private Vector3 CameraForward = new Vector3(0.0f, 0.0f, 0.0f);
     //カメラダミー横方向取得
@@ -22,13 +24,14 @@ public class MainCameraControl : MonoBehaviour {
     PlayerMove player;
 
     private float cameraDistance = 30.0f;                           //カメラの距離
+    [Range(0.0f, 50.0f)]
     public float moveCameraDistance = 30.0f;                        //通常時のカメラ距離
 
     private Vector3 cameraMoveDirection = new Vector3(0.0f, 0.0f, 0.0f);
 
-    private Vector3 cameraPos;
+    public Vector3 cameraPos;
 
-    private Vector3 CameraRotate;
+    public Vector3 CameraRotate;
 
     private Vector3 rayDirection =new Vector3(0.0f,-1.0f,0.0f);
 
@@ -36,7 +39,7 @@ public class MainCameraControl : MonoBehaviour {
     void Start()
     {
         cameraDammyObj = GameObject.Find("CameraDammy").GetComponent<CameraControl>();
-
+        flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         player = GameObject.Find("player").GetComponent<PlayerMove>();
         cameraPos = Camera.main.transform.position;
 
@@ -45,7 +48,10 @@ public class MainCameraControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //カメラをダミーの位置へ持っていく
+
+        if (flagsInStageManager.batleMode == false)
+        {
+            //カメラをダミーの位置へ持っていく
         cameraPos = cameraDammyObj.transform.position;
 
         //カメラダミー正面方向取得
@@ -53,64 +59,98 @@ public class MainCameraControl : MonoBehaviour {
         //カメラダミー横方向取得
         CameraRight = cameraDammyObj.transform.TransformDirection(Vector3.right);
 
-        cameraDistance = moveCameraDistance;
+       
+
+            cameraDistance = moveCameraDistance;
         //カメラの距離を設定
         cameraPos -= cameraDistance / 5.0f * CameraForward;
         //cameraPos.y -= swingingCameraYposDown ;
 
-        //カメラの傾き調整
-        CameraRotate = cameraDammyObj.transform.localEulerAngles;
+        
+            //カメラの傾き調整
+            CameraRotate = cameraDammyObj.transform.localEulerAngles;
 
-        float rad = cameraDammyObj.transform.position.y - transform.position.y;
-        Debug.Log(rad);
-        CameraRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
+            float rad = cameraDammyObj.transform.position.y - transform.position.y;
+            Debug.Log(rad);
+            CameraRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
 
-        transform.localEulerAngles = CameraRotate;
+            transform.localEulerAngles = CameraRotate;
 
 
-        //カメラの高さ調整
-        RaycastHit floorHit;
-        // float overDistance = 0.0f;
-        if (Physics.Raycast(cameraPos, rayDirection, out floorHit, LayerMask.GetMask("Stage")))
-        {
+            //カメラの高さ調整
+            RaycastHit floorHit;
+            // float overDistance = 0.0f;
+            if (Physics.Raycast(cameraPos, rayDirection, out floorHit, LayerMask.GetMask("Stage")))
+            {
 
-            stageRiseY = floorHit.point.y + 1.5f;
-            if (player.transform.position.y - CameraDownDirection > stageRiseY) stageRiseY = player.transform.position.y - CameraDownDirection;
+                stageRiseY = floorHit.point.y + 1.5f;
+                if (player.transform.position.y - CameraDownDirection > stageRiseY) stageRiseY = player.transform.position.y - CameraDownDirection;
+            }
+            else
+            {
+                stageRiseY = player.transform.position.y - CameraDownDirection;
+            }
+
+
+            cameraPos.y = stageRiseY;
+
         }
-        else
-        {
-            stageRiseY = player.transform.position.y - CameraDownDirection;
-        }
-           
 
-         cameraPos.y = stageRiseY;
+
 
         transform.position = cameraPos;
-
-        //ダミーからカメラの方向を取得
-        Vector3 heading = transform.position - cameraDammyObj.transform.position;
+        if (flagsInStageManager.batleMode == false)
+        {
+            //ダミーからカメラの方向を取得
+            Vector3 heading = transform.position - cameraDammyObj.transform.position;
         Vector3 direction = heading / heading.magnitude;
 
-        RaycastHit camHit;
       
-        
-        if (Physics.Raycast(cameraDammyObj.transform.position, direction, out camHit, cameraDistance / 5.0f, LayerMask.GetMask("Stage")))
-        {
+            RaycastHit camHit;
 
-            transform.position = camHit.point;
 
-        }
- 
-        cameraPos = transform.position;
-/*
-        if (transform.position.y - player.transform.position.y > Mathf.Abs(0.8f))
-        {
-            cameraPos.y = cameraPosPrevious.y;
-        } 
-        */
+            if (Physics.Raycast(cameraDammyObj.transform.position, direction, out camHit, cameraDistance / 5.0f, LayerMask.GetMask("Stage")))
+            {
+
+                transform.position = camHit.point;
+
+            }
+
+            cameraPos = transform.position;
+            /*
+                    if (transform.position.y - player.transform.position.y > Mathf.Abs(0.8f))
+                    {
+                        cameraPos.y = cameraPosPrevious.y;
+                    } 
+                    */
             transform.position = cameraPos;
+            cameraPosPrevious = transform.position;
+        }
 
-        cameraPosPrevious = transform.position;
+
+        if (flagsInStageManager.batleMode == true)
+        {
+            float playerEnemyDistance = Mathf.Abs(Vector3.Distance(player.targetEnemy.transform.position, player.transform.position)) + 3.0f;
+            Vector3 cameraMoveEndPos = cameraPosPrevious - playerEnemyDistance * CameraForward;
+            Vector3 cameraMovePos = (cameraMoveEndPos - cameraPos) * 0.05f;
+            float cameraMoveEndY = cameraPosPrevious.y + 5.0f;
+            float cameraMoveY = (cameraMoveEndY - cameraPos.y) * 0.05f;
+            //バトルカメラの距離を設定
+            cameraPos += cameraMovePos;
+            cameraPos.y += cameraMoveY;
+            Debug.Log(playerEnemyDistance);
+            //カメラの傾き調整
+            // CameraRotate = cameraDammyObj.transform.localEulerAngles;
+            //CameraRotate.x = cameraDammyObj.transform.localEulerAngles.x + 20.0f;
+
+            float playerEnemyDistance2 = Vector3.Distance(player.targetEnemy.transform.position, player.transform.position) * 2.0f;
+            float xRotateEnd = CameraRotate.x + 10.0f;
+            float xRotate = (xRotateEnd - CameraRotate.x) * 0.05f;
+            Vector3 cameraBattleRotate = new Vector3(xRotate, CameraRotate.y, CameraRotate.z);
+            CameraRotate.y += Input.GetAxis("Horizontal") * 0.5f;
+            transform.localEulerAngles = cameraBattleRotate;
+          }
+
 
         
 

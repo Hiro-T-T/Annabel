@@ -104,7 +104,7 @@ public class FlagsInStageManager : MonoBehaviour {
 
     void stageUnlock()
     {
-
+        /*
         int nowStageNum = 0;
 
         if (Application.loadedLevelName == "tutorial") nowStageNum = 1;
@@ -112,7 +112,7 @@ public class FlagsInStageManager : MonoBehaviour {
         if (Application.loadedLevelName == "stage2") nowStageNum = 3;
         if (Application.loadedLevelName == "stage3") nowStageNum = 4;
         if (Application.loadedLevelName == "stage4") nowStageNum = 5;
-
+        */
 
         if (gameClear == true)
         {
@@ -154,7 +154,7 @@ public class FlagsInStageManager : MonoBehaviour {
                 {
                     pauseFlag = false;
                     Time.timeScale = 1.0f;
-                    Screen.lockCursor = true;
+                   // Screen.lockCursor = true;
                     pauseAnim.SetBool("pause", false);
                 }
 

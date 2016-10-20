@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour {
 
     public GameObject targetEnemy;                     //ターゲットエネミー
     private RectTransform targetMaker;
-
+    private GameObject targetMakerObj;
     //カメラ正面方向取得
     private Vector3 CameraForward;
     //カメラ横方向取得
@@ -47,7 +47,8 @@ public class PlayerMove : MonoBehaviour {
         isPlayerController = gameObject.GetComponent<CharacterController>();
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         animator = GetComponent<Animator>();
-        targetMaker = GameObject.Find("Target").GetComponent<RectTransform>();
+        targetMakerObj = Resources.Load("Prefab/CanvasTarget/Target") as GameObject;
+        
    
      
 
@@ -72,6 +73,7 @@ public class PlayerMove : MonoBehaviour {
         //一番近い敵
         if(flagsInStageManager.batleMode == true)
         {
+            targetMaker = GameObject.Find("Target").GetComponent<RectTransform>();
             targetEnemy = nearEnemySearch();
             targetEnemy.GetComponent<EnemyMove>().colNum = 1;
             targetMaker.transform.position = Camera.main.WorldToScreenPoint(targetEnemy.transform.position);
@@ -82,9 +84,13 @@ public class PlayerMove : MonoBehaviour {
     {
         bool pushKeyFlag = false;
         //カメラ正面方向取得
-        CameraForward = Camera.main.transform.TransformDirection(Vector3.forward);
-        //カメラ横方向取得
-        CameraRight = Camera.main.transform.TransformDirection(Vector3.right);
+
+            CameraForward = Camera.main.transform.TransformDirection(Vector3.forward);
+            //カメラ横方向取得
+            CameraRight = Camera.main.transform.TransformDirection(Vector3.right);
+        
+
+
 
         if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0)
         {
@@ -108,6 +114,8 @@ public class PlayerMove : MonoBehaviour {
 
             Vector3 playerRemovePos = transform.position;
             //移動
+            //     moveDirection += (moveSpeed * Input.GetAxis("Horizontal")) * CameraRight + (moveSpeed * Input.GetAxis("Vertical")) * CameraForward;
+
             moveDirection += (moveSpeed * Input.GetAxis("Horizontal")) * CameraRight + (moveSpeed * Input.GetAxis("Vertical")) * CameraForward;
 
             if (Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") != 0.0f)

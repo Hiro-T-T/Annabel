@@ -12,10 +12,20 @@ public class EncountZone : MonoBehaviour {
     private Vector3 distancePosQuarter;
     private float apeearX = 0.0f;
     private float apeearZ = 0.0f;
+
+    GameObject mainCam;
+    GameObject battleCam;
+
+    GameObject canvasTargetControlObj;
     // Use this for initialization
     void Start () {
         pos = transform.position;
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
+        canvasTargetControlObj = GameObject.Find("GameControlObject");
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+        battleCam = GameObject.Find("BattleCamera");
+
+
         childObject = gameObject.transform.FindChild("DistanceCheck").gameObject;
         childPos = childObject.transform.position;
         distancePos = (childPos - pos) * 2;
@@ -39,6 +49,7 @@ public class EncountZone : MonoBehaviour {
     {
        if(col.gameObject.tag == ("Player"))
         {
+            canvasTargetControlObj.SendMessage("canvasTargetAppear");
             flagsInStageManager.batleMode = true;
             EnemyEncounter();
             
