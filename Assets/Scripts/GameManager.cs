@@ -2,14 +2,17 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-    public int counter = 0;
+
+    public bool door = false;
+    public bool end = false;
+
 	// Use this for initialization
 	void Start () {
-        counter = 0;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        counter++;
+
 	}
 }
