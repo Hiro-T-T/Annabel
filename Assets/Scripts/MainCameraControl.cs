@@ -19,21 +19,24 @@ public class MainCameraControl : MonoBehaviour {
     public float CameraDownDirection = 1.0f;    //プレイヤーからズラすカメラの距離
 
     private Vector3 cameraPosPrevious = new Vector3(0.0f, 0.0f, 0.0f);
-
+    private Vector3 battleCameraPosPrevious = new Vector3(0.0f, 0.0f, 0.0f);
     //プレイヤー情報取得
     PlayerMove player;
 
     private float cameraDistance = 30.0f;                           //カメラの距離
     [Range(0.0f, 50.0f)]
     public float moveCameraDistance = 30.0f;                        //通常時のカメラ距離
-
+    [Range(0.0f, 20.0f)]
+    public float battleCameraDistance = 10.0f;
     private Vector3 cameraMoveDirection = new Vector3(0.0f, 0.0f, 0.0f);
 
     public Vector3 cameraPos;
 
     public Vector3 CameraRotate;
-
+    public Vector3 CameraMoveRotate = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 rayDirection =new Vector3(0.0f,-1.0f,0.0f);
+
+    
 
     // Use this for initialization
     void Start()
@@ -51,8 +54,12 @@ public class MainCameraControl : MonoBehaviour {
 
         if (flagsInStageManager.batleMode == false)
         {
+
             //カメラをダミーの位置へ持っていく
-        cameraPos = cameraDammyObj.transform.position;
+            Vector3 cameraMovePos = cameraDammyObj.transform.position;
+
+          
+            
 
         //カメラダミー正面方向取得
         CameraForward = cameraDammyObj.transform.TransformDirection(Vector3.forward);
@@ -63,16 +70,20 @@ public class MainCameraControl : MonoBehaviour {
 
             cameraDistance = moveCameraDistance;
         //カメラの距離を設定
-        cameraPos -= cameraDistance / 5.0f * CameraForward;
+        cameraMovePos -= cameraDistance / 5.0f * CameraForward;
         //cameraPos.y -= swingingCameraYposDown ;
 
-        
-            //カメラの傾き調整
-            CameraRotate = cameraDammyObj.transform.localEulerAngles;
 
+            //カメラの傾き調整
+            CameraMoveRotate = cameraDammyObj.transform.localEulerAngles;
+           // CameraRotate = cameraDammyObj.transform.localEulerAngles;
             float rad = cameraDammyObj.transform.position.y - transform.position.y;
-           // Debug.Log(rad);
-            CameraRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
+            // Debug.Log(rad);
+            CameraMoveRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
+           // CameraRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
+
+                CameraRotate += (CameraMoveRotate - CameraRotate);
+            
 
             transform.localEulerAngles = CameraRotate;
 
@@ -92,11 +103,13 @@ public class MainCameraControl : MonoBehaviour {
             }
 
 
-            cameraPos.y = stageRiseY;
+            cameraMovePos.y = stageRiseY;
+
+            cameraPos += (cameraMovePos - cameraPos) * 0.05f;
 
         }
 
-
+        
 
         transform.position = cameraPos;
         if (flagsInStageManager.batleMode == false)
@@ -130,7 +143,7 @@ public class MainCameraControl : MonoBehaviour {
 
         if (flagsInStageManager.batleMode == true)
         {
-            float playerEnemyDistance = Mathf.Abs(Vector3.Distance(player.targetEnemy.transform.position, player.transform.position)) + 3.0f;
+            float playerEnemyDistance = Mathf.Abs(Vector3.Distance(player.targetEnemyPosition.transform.position, player.transform.position)) + battleCameraDistance;
             Vector3 cameraMoveEndPos = cameraPosPrevious - playerEnemyDistance * CameraForward;
             Vector3 cameraMovePos = (cameraMoveEndPos - cameraPos) * 0.05f;
             float cameraMoveEndY = cameraPosPrevious.y + 5.0f;
@@ -138,6 +151,7 @@ public class MainCameraControl : MonoBehaviour {
             //バトルカメラの距離を設定
             cameraPos += cameraMovePos;
             cameraPos.y += cameraMoveY;
+            battleCameraPosPrevious = transform.position;
             Debug.Log(playerEnemyDistance);
             //カメラの傾き調整
             // CameraRotate = cameraDammyObj.transform.localEulerAngles;

@@ -30,7 +30,8 @@ public class PlayerMove : MonoBehaviour {
     private float addDirectionMax = 0.0f;                                       //制限超過分考慮した地上慣性制限
     private float moveDirectionMagnitudeRe1f = 0.0f;							//1フレーム前のmoveDirection.magunitude
 
-    public GameObject targetEnemy;                     //ターゲットエネミー
+    public GameObject targetEnemy = null;                     //ターゲットエネミー
+    public GameObject targetEnemyPosition;
     private RectTransform targetMaker;
     private GameObject targetMakerObj;
     //カメラ正面方向取得
@@ -76,7 +77,8 @@ public class PlayerMove : MonoBehaviour {
             targetMaker = GameObject.Find("Target").GetComponent<RectTransform>();
             targetEnemy = nearEnemySearch();
             targetEnemy.GetComponent<EnemyMove>().colNum = 1;
-            targetMaker.transform.position = Camera.main.WorldToScreenPoint(targetEnemy.transform.position);
+            targetEnemyPosition = targetEnemy.transform.FindChild("TargetPosition").gameObject;
+            targetMaker.transform.position = Camera.main.WorldToScreenPoint(targetEnemyPosition.transform.position);
         }
   
     }

@@ -81,6 +81,14 @@ public class FlagsInStageManager : MonoBehaviour {
             buttonCount = 0;
         }
 
+        if(batleMode == true)
+        {
+            GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            if(enemys.Length == 0)
+            {
+                batleMode = false;
+            }
+        }
 
     }
 

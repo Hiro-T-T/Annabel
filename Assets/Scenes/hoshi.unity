@@ -360,9 +360,11 @@ MonoBehaviour:
   stageRiseAddY: 2.5
   stageRiseRotateY: 1.5
   CameraDownDirection: 1
-  moveCameraDistance: 30
+  moveCameraDistance: 40
+  battleCameraDistance: 7.5
   cameraPos: {x: 0, y: 0, z: 0}
   CameraRotate: {x: 0, y: 0, z: 0}
+  CameraMoveRotate: {x: 0, y: 0, z: 0}
 --- !u!1 &473654770
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,6 +922,7 @@ MonoBehaviour:
   rigidBodyInfo: {fileID: 0}
   addDirectionMaxInAir: 0
   targetEnemy: {fileID: 0}
+  targetEnemyPosition: {fileID: 0}
 --- !u!23 &1165239659
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1027,7 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1000
-  interval: 0.1
+  interval: 0
 --- !u!1 &1367246038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,9 +1745,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy:
-  - {fileID: 1000012368974630, guid: e82203adbd826c449b9022da637e63f4, type: 2}
-  - {fileID: 1000012368974630, guid: e82203adbd826c449b9022da637e63f4, type: 2}
-  - {fileID: 1000012368974630, guid: e82203adbd826c449b9022da637e63f4, type: 2}
+  - {fileID: 1000010145809930, guid: 535a53b4bf7dd6e4682388cecd2191ea, type: 2}
+  - {fileID: 1000010145809930, guid: 535a53b4bf7dd6e4682388cecd2191ea, type: 2}
+  - {fileID: 1000010145809930, guid: 535a53b4bf7dd6e4682388cecd2191ea, type: 2}
 --- !u!54 &2045922369
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,6 +13,9 @@ public class FireMagic1 : MonoBehaviour {
    private Vector3 enemyDistanceHalf;
    Vector3 bezierHalfPoint;
 
+   public int damage = 2;
+    public float tAdd = 0.03f;
+
  //   float r = 
     
     float t = 0.0f;
@@ -20,7 +23,7 @@ public class FireMagic1 : MonoBehaviour {
 	void Start () {
         playerMove = GameObject.Find("player").GetComponent<PlayerMove>();
         pos = gameObject.transform.position;
-        targetObj = playerMove.targetEnemy;
+        targetObj = playerMove.targetEnemyPosition;
 
         playerTransform = playerMove.transform.position;
         enemyTransform = targetObj.transform.position;
@@ -42,8 +45,8 @@ public class FireMagic1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        t += 0.05f;
-	if(playerMove.targetEnemy != null)
+        t += tAdd;
+	if(targetObj != null)
         {
             
             enemyTransform = targetObj.transform.position;
@@ -52,6 +55,19 @@ public class FireMagic1 : MonoBehaviour {
             // pos = enemyDistance;
             transform.position = pos;
 
+        }else
+        {
+            Destroy(gameObject);
         }
 	}
+
+    void OnTriggerStay(Collider col)
+    {
+        if(col.gameObject.tag == ("Enemy"))
+        {
+            EnemyAI enemyAI = col.GetComponent<EnemyAI>();
+            enemyAI.hp -= damage;
+            Destroy(gameObject);
+        }
+    }
 }
