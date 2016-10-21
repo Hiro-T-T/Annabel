@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour {
 
     public CharacterController isPlayerController;                          //キャラクターコントローラー
     public Rigidbody rigidBodyInfo;                                         //リジッドボディ呼び出し用変数
-
+    PlayerShoot playerShoot;
     public float addDirectionMaxInAir = 0.0f;                                   //制限超過分考慮した空中慣性制限
     private float moveDirectionMagnitudeRe1fInAir = 0.0f;                       //1フレーム前のmoveDirection.magunitude
     private float addDirectionMax = 0.0f;                                       //制限超過分考慮した地上慣性制限
@@ -48,7 +48,7 @@ public class PlayerMove : MonoBehaviour {
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         animator = GetComponent<Animator>();
         targetMakerObj = Resources.Load("CanvasTarget/Target") as GameObject;
-        
+        playerShoot = gameObject.GetComponent<PlayerShoot>();
    
      
 

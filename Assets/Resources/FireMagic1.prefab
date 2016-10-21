@@ -23,10 +23,10 @@ GameObject:
   - 135: {fileID: 135000012778407436}
   - 23: {fileID: 23000010291121360}
   - 54: {fileID: 54000010529851102}
-  - 114: {fileID: 114000010213905614}
   - 82: {fileID: 82000011771775824}
+  - 114: {fileID: 114000010009220230}
   m_Layer: 0
-  m_Name: PlayerTama 1
+  m_Name: FireMagic1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114000010213905614
+--- !u!114 &114000010009220230
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -209,12 +209,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013367185596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15b30ed064e89e14a83685c001e27c63, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ddf2abec2b522245aaef996c17ed99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 3
-  attack: 1
-  sound: {fileID: 8300000, guid: 7bc4e97bcf508974fbb8eb1dbf17f3d7, type: 3}
 --- !u!135 &135000012778407436
 SphereCollider:
   m_ObjectHideFlags: 1

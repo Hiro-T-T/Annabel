@@ -71,7 +71,7 @@ public class MainCameraControl : MonoBehaviour {
             CameraRotate = cameraDammyObj.transform.localEulerAngles;
 
             float rad = cameraDammyObj.transform.position.y - transform.position.y;
-            Debug.Log(rad);
+           // Debug.Log(rad);
             CameraRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
 
             transform.localEulerAngles = CameraRotate;

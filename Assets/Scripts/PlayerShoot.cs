@@ -8,6 +8,8 @@ public class PlayerShoot : MonoBehaviour {
    private GameObject trg;
     public float speed = 1000f;
 
+    private bool attack = false;
+
     private GameObject player;
     //private GameObject camera;
     FlagsInStageManager flagsInStageManager;
@@ -31,13 +33,30 @@ public class PlayerShoot : MonoBehaviour {
         //trg = GameObject.Find("trigger");
         trg = gameObject.transform.FindChild("TrgObj").gameObject;
         playerMove = player.GetComponent<PlayerMove>();
-        rifle = GameObject.Find("DammyCamera").transform;
+        rifle = player.transform;
         //cameracontrol = camera_s.GetComponent<CameraControl>();
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         animator = GetComponent<Animator>();
-        se = gameObject.GetComponent<AudioSource>();
-        se.loop = false;
+     //   se = gameObject.GetComponent<AudioSource>();
+     //   se.loop = false;
         bullet = Resources.Load("FireMagic1") as GameObject;
+    }
+
+    void Update()
+    {
+        if(Input.GetAxis("Attack") == 1 && attack == false)
+        {
+            ShootTama();    //発砲
+            attack = true;
+            
+
+        }
+        else if(Input.GetAxis("Attack") == 0)
+        {
+            attack = false;
+          
+        }
+     //   Debug.Log(Input.GetAxis("Atack"));
     }
 
     void FixedUpdate()
@@ -46,15 +65,17 @@ public class PlayerShoot : MonoBehaviour {
         {
             time += Time.deltaTime; //経過時間を加算
 
-            if (Input.GetMouseButtonDown(0))
+            if (attack == true)
             {
+
+
                 if (time >= interval)
                 {
-                    ShootTama();    //発砲
-                    animator.SetTrigger("isAttacking");
-
-
+                    
+                                    //  animator.SetTrigger("isAttacking");
                     time = 0f;  //初期化
+
+
                 }
             }
         }
@@ -68,15 +89,19 @@ public class PlayerShoot : MonoBehaviour {
     //発砲関数
     void ShootTama()
     {
-        GameObject obj = GameObject.Instantiate(bullet) as GameObject;
-      //  se.PlayOneShot(sound);
-        obj.transform.position = trg.transform.position;
-        obj.GetComponent<Rigidbody>().AddForce(rifle.forward * speed);    //銃の向きが元から反転しているため、併せてforwardも反転させる
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject obj = GameObject.Instantiate(bullet) as GameObject;
+            //  se.PlayOneShot(sound);
+            obj.transform.position = trg.transform.position;
+            //   obj.GetComponent<Rigidbody>().AddForce(rifle.forward * speed);    //銃の向きが元から反転しているため、併せてforwardも反転させる
 
-        // transform.LookAt(bullet.transform.position);
-        interval = 0.7f;
+            // transform.LookAt(bullet.transform.position);
+            interval = 0.7f;
 
-      //  player.transform.eulerAngles = new Vector3(0.0f, cameracontrol.trueDammyCamRotate.y, 0.0f);
+            //  player.transform.eulerAngles = new Vector3(0.0f, cameracontrol.trueDammyCamRotate.y, 0.0f);
+        }
+
 
     }
 }

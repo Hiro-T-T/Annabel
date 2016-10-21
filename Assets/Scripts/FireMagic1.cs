@@ -1,0 +1,57 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class FireMagic1 : MonoBehaviour {
+
+   private PlayerMove playerMove;
+   private Vector3 pos;
+   private GameObject targetObj;
+
+   Vector3 playerTransform;
+   Vector3 enemyTransform;
+   private Vector3 enemyDistance;
+   private Vector3 enemyDistanceHalf;
+   Vector3 bezierHalfPoint;
+
+ //   float r = 
+    
+    float t = 0.0f;
+	// Use this for initialization
+	void Start () {
+        playerMove = GameObject.Find("player").GetComponent<PlayerMove>();
+        pos = gameObject.transform.position;
+        targetObj = playerMove.targetEnemy;
+
+        playerTransform = playerMove.transform.position;
+        enemyTransform = targetObj.transform.position;
+        enemyDistance = (enemyTransform + playerTransform) * 0.5f;
+        //enemyDistanceHalf = new Vector3(playerTransform.x + (Mathf.Abs(enemyDistance.x) * 0.5f), playerTransform.y + (Mathf.Abs(enemyDistance.y) * 0.5f), playerTransform.z + (Mathf.Abs(enemyDistance.z) * 0.5f));
+
+        float tamaPointDirection = Random.Range(-10.0f, 10.0f);
+
+        bezierHalfPoint.x = Random.Range(playerTransform.x, enemyTransform.x) + tamaPointDirection;
+
+        tamaPointDirection = Random.Range(-3.0f, 3.0f);
+
+        bezierHalfPoint.y = Random.Range(playerTransform.y, enemyTransform.y) + tamaPointDirection;
+
+        tamaPointDirection = Random.Range(-10.0f, 10.0f);
+
+        bezierHalfPoint.z = Random.Range(playerTransform.z, enemyTransform.z) + tamaPointDirection;
+    }
+	// Update is called once per frame
+	void Update () {
+
+        t += 0.05f;
+	if(playerMove.targetEnemy != null)
+        {
+            
+            enemyTransform = targetObj.transform.position;
+            pos = (1 - t) * (1 - t) * playerTransform + 2 * (1 - t) * t * bezierHalfPoint + t * t * enemyTransform;
+            
+            // pos = enemyDistance;
+            transform.position = pos;
+
+        }
+	}
+}
