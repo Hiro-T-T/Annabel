@@ -14,13 +14,16 @@ public class EnemyAI : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+       
         player = GameObject.FindGameObjectWithTag("Player").transform;
+       
         // count = GameObject.Find("GameManager").GetComponent<GameManager>().counter;
     }
 
     // Update is called once per frame
     void Update()
     { 
+
         count++;
         Vector3 playerPos = player.position;    //プレイヤーの位置
         Vector3 direction = playerPos - transform.position; //方向

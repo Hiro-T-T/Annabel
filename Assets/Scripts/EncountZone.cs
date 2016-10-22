@@ -52,7 +52,8 @@ public class EncountZone : MonoBehaviour {
             canvasTargetControlObj.SendMessage("canvasTargetAppear");
             flagsInStageManager.batleMode = true;
             EnemyEncounter();
-            
+            PlayerMove playerMove = col.GetComponent<PlayerMove>();
+            playerMove.encountPos = transform.position;
             Destroy(this.gameObject);
         }
       //  Debug.Log("これはいい大根");

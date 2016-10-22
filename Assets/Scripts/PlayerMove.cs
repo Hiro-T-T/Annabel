@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour {
     public GameObject targetEnemyPosition;
     private RectTransform targetMaker;
     private GameObject targetMakerObj;
+    public Vector3 encountPos;
     //カメラ正面方向取得
     private Vector3 CameraForward;
     //カメラ横方向取得
@@ -60,6 +61,9 @@ public class PlayerMove : MonoBehaviour {
 
     void Update()
     {
+        Vector2 pos = Camera.main.ScreenToWorldPoint(transform.position);
+     //   Debug.Log(pos);
+
         if (hp <= 0)
         {
             Destroy(gameObject);
@@ -86,6 +90,9 @@ public class PlayerMove : MonoBehaviour {
             targetEnemy.GetComponent<EnemyMove>().colNum = 1;
             targetEnemyPosition = targetEnemy.transform.FindChild("TargetPosition").gameObject;
             targetMaker.transform.position = Camera.main.WorldToScreenPoint(targetEnemyPosition.transform.position);
+            float targetMakerZ = (0.0f - targetMaker.transform.position.z);
+            targetMaker.position += new Vector3(0.0f, 0.0f, targetMakerZ);
+           // Debug.Log(targetMaker.transform.position);
         }
   
     }

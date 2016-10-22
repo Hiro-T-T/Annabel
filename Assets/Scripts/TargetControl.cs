@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class TargetControl : MonoBehaviour {
 
+    //現在使用していませんar
+
     PlayerMove playerMove;
     RectTransform rectTransform = null;
-    [SerializeField] Transform target = null;
+    //[SerializeField] Transform 
+    GameObject target;
 
     void Awake()
     {
@@ -20,7 +23,8 @@ public class TargetControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-         target = playerMove.targetEnemyPosition.transform;
-        rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, target.position);
+         target = playerMove.targetEnemyPosition;
+        rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, target.transform.position);
+        Debug.Log(rectTransform.position);
     }
 }
