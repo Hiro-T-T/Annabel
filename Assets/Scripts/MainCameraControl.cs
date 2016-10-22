@@ -152,7 +152,7 @@ public class MainCameraControl : MonoBehaviour {
             cameraPos += cameraMovePos;
             cameraPos.y += cameraMoveY;
             battleCameraPosPrevious = transform.position;
-            Debug.Log(playerEnemyDistance);
+         //   Debug.Log(playerEnemyDistance);
             //カメラの傾き調整
             // CameraRotate = cameraDammyObj.transform.localEulerAngles;
             //CameraRotate.x = cameraDammyObj.transform.localEulerAngles.x + 20.0f;
@@ -161,8 +161,12 @@ public class MainCameraControl : MonoBehaviour {
             float xRotateEnd = CameraRotate.x + 10.0f;
             float xRotate = (xRotateEnd - CameraRotate.x) * 0.05f;
             Vector3 cameraBattleRotate = new Vector3(xRotate, CameraRotate.y, CameraRotate.z);
-            CameraRotate.y += Input.GetAxis("Horizontal") * 0.5f;
-            transform.localEulerAngles = cameraBattleRotate;
+            if(player.guardFlag == false)
+            {
+                CameraRotate.y += Input.GetAxis("Horizontal") * 0.5f;
+                transform.localEulerAngles = cameraBattleRotate;
+            }
+           
           }
 
 

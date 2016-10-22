@@ -40,7 +40,7 @@ public class EncountZone : MonoBehaviour {
     void Update () {
 
         Collider[] hit = Physics.OverlapBox(transform.position, distancePos);
-        Debug.Log(distancePos.x);
+      //  Debug.Log(distancePos.x);
 
         
 	}

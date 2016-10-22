@@ -4,6 +4,9 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
 
+    public float hp = 10.0f;
+    public bool guardFlag = false;
+
     public float moveSpeed = 0.3f;                                              //地上時移動速度
     public float movePowInAir = 0.02f;                                          //空中での移動にかかる強さ
     public float moveMaxInAir = 0.3f;                                           //空中での感性限界値
@@ -57,6 +60,11 @@ public class PlayerMove : MonoBehaviour {
 
     void Update()
     {
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         moveDirection.y = 0.0f;
         if (playerInAirFlag == false)
         {
@@ -67,8 +75,7 @@ public class PlayerMove : MonoBehaviour {
                 moveDirectioninAir = jumppow;
 
             }
-
-
+         
 
         }
         //一番近い敵
@@ -94,7 +101,7 @@ public class PlayerMove : MonoBehaviour {
 
 
 
-        if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0)
+        if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0 && guardFlag == false)
         {
             if (playerInAirFlag == false)
             {
@@ -177,7 +184,19 @@ public class PlayerMove : MonoBehaviour {
             if (moveDirectioninAir > jumppow) moveDirectioninAir = jumppow;
 
             airFlagProcess();
+            
         }
+        if(flagsInStageManager.batleMode == true)
+        {
+            playerGuard();
+            if(guardCounter == true)
+            {
+                GameObject counterMagic1 = Resources.Load("CounterMagic1") as GameObject;
+                GameObject obj = GameObject.Instantiate(counterMagic1) as GameObject;
+                guardCounter = false;
+            }
+        }
+        
     }
 
     GameObject nearEnemySearch()
@@ -201,7 +220,7 @@ public class PlayerMove : MonoBehaviour {
 
             targetOnceEnemy.GetComponent<EnemyMove>().colNum = 0;
         }
-        Debug.Log("一番近い敵" + targetEnemyObj);//ほげぇ
+       // Debug.Log("一番近い敵" + targetEnemyObj);//ほげぇ
         return targetEnemyObj;
 
     }
@@ -219,5 +238,23 @@ public class PlayerMove : MonoBehaviour {
 
         }
 
+    }
+
+    public int guardTime = 0;
+    public bool guardCounter = false;
+    public int guardCounterTime = 20;
+    void playerGuard()
+    {
+        if (Input.GetAxis("Guard") == 1)
+        {
+            Debug.Log(Input.GetAxis("Guard"));
+            guardFlag = true;
+            guardTime++;
+        }
+        else
+        {
+            guardFlag = false;
+            guardTime = 0;
+        }
     }
 }
