@@ -36,7 +36,7 @@ public class MainCameraControl : MonoBehaviour {
     public Vector3 CameraMoveRotate = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 rayDirection =new Vector3(0.0f,-1.0f,0.0f);
 
-    
+    public Vector3 battleCameraX = new Vector3(0.0f, 0.0f, 0.0f);
 
     // Use this for initialization
     void Start()
@@ -94,7 +94,7 @@ public class MainCameraControl : MonoBehaviour {
             if (Physics.Raycast(cameraPos, rayDirection, out floorHit, LayerMask.GetMask("Stage")))
             {
 
-                stageRiseY = floorHit.point.y + 1.5f;
+                stageRiseY = floorHit.point.y + stageRiseAddY;
                 if (player.transform.position.y - CameraDownDirection > stageRiseY) stageRiseY = player.transform.position.y - CameraDownDirection;
             }
             else
@@ -139,17 +139,25 @@ public class MainCameraControl : MonoBehaviour {
             transform.position = cameraPos;
             cameraPosPrevious = transform.position;
         }
-
+        Debug.Log(CameraForward);
 
         if (flagsInStageManager.batleMode == true)
         {
-            float playerEnemyDistance = Mathf.Abs(Vector3.Distance(player.targetEnemyPosition.transform.position, player.transform.position)) + battleCameraDistance;
-            Vector3 cameraMoveEndPos = cameraPosPrevious - playerEnemyDistance * CameraForward;
+            Vector2 playerScreenPos = Camera.main.WorldToScreenPoint(player.transform.position);
+            Vector2 enemyScreenPos = Camera.main.WorldToScreenPoint(player.targetEnemyPosition.transform.position);
+            float playerEnemyDistance = Vector2.Distance(playerScreenPos, enemyScreenPos) * 0.1f;
+            if (playerEnemyDistance >= 20) playerEnemyDistance = 20;
+            Debug.Log(playerEnemyDistance);
+            //float playerEnemyDistance = Mathf.Abs(Vector3.Distance(player.targetEnemyPosition.transform.position, player.transform.position));
+            Vector3 cameraMoveEndPos = player.transform.position - (player.encountPos - player.transform.position);
+            //cameraPosPrevious - playerEnemyDistance * (CameraForward);
+            cameraMoveEndPos -= playerEnemyDistance * (CameraForward);
+            cameraMoveEndPos.y = cameraPosPrevious.y;
             Vector3 cameraMovePos = (cameraMoveEndPos - cameraPos) * 0.05f;
             float cameraMoveEndY = cameraPosPrevious.y + 5.0f;
             float cameraMoveY = (cameraMoveEndY - cameraPos.y) * 0.05f;
             //バトルカメラの距離を設定
-            cameraPos += cameraMovePos;
+            cameraPos += cameraMovePos * 0.5f;
             cameraPos.y += cameraMoveY;
             battleCameraPosPrevious = transform.position;
          //   Debug.Log(playerEnemyDistance);
@@ -157,17 +165,18 @@ public class MainCameraControl : MonoBehaviour {
             // CameraRotate = cameraDammyObj.transform.localEulerAngles;
             //CameraRotate.x = cameraDammyObj.transform.localEulerAngles.x + 20.0f;
 
-            float playerEnemyDistance2 = Vector3.Distance(player.targetEnemy.transform.position, player.transform.position) * 2.0f;
+            float playerEnemyDistance2 = (playerScreenPos.x - enemyScreenPos.x) * 0.05f;
             float xRotateEnd = CameraRotate.x + 10.0f;
             float xRotate = (xRotateEnd - CameraRotate.x) * 0.05f;
             Vector3 cameraBattleRotate = new Vector3(xRotate, CameraRotate.y, CameraRotate.z);
             if(player.guardFlag == false)
             {
-                CameraRotate.y += Input.GetAxis("Horizontal") * 0.5f;
-                transform.localEulerAngles = cameraBattleRotate;
+                
+                CameraRotate.y = transform.localEulerAngles.y - playerEnemyDistance2;
+              //  transform.localEulerAngles = cameraBattleRotate;
             }
-           
-          }
+            transform.LookAt(player.encountPos);
+        }
 
 
         

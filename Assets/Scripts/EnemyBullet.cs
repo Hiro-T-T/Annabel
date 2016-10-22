@@ -10,12 +10,14 @@ public class EnemyBullet : MonoBehaviour {
     public float damage = 2;
     private GameObject player;
     private PlayerMove playerMove;
+    FlagsInStageManager flagsInStageManager;
     void Start()
     {
         second = 0;
         counter = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         playerMove = player.GetComponent<PlayerMove>();
+        flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
     }
 
     void Update()
@@ -29,7 +31,7 @@ public class EnemyBullet : MonoBehaviour {
             second = 0;
             counter++;
         }
-        if(counter > lifeTime)
+        if(counter > lifeTime || flagsInStageManager.batleMode == false)
         {
             Destroy(gameObject);
         }

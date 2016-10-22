@@ -23,7 +23,7 @@ public class CounterMagic1 : MonoBehaviour {
 	}
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == ("Enemy"))
+        if (col.gameObject.tag == ("Enemy") && time <= 30)
         {
             EnemyAI enemyAI = col.GetComponent<EnemyAI>();
             enemyAI.hp -= damage;
