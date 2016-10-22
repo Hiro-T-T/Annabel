@@ -44,19 +44,27 @@ public class PlayerShoot : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetAxis("Attack") == 1 && attack == false)
+        if (time >= interval)
+        {
+              if (Input.GetAxis("Attack") == 1 && attack == false)
         {
             ShootTama();    //発砲
             attack = true;
-            
+            time = 0f;  //初期化
 
-        }
-        else if(Input.GetAxis("Attack") == 0)
+
+            }
+            else if(Input.GetAxis("Attack") == 0)
         {
             attack = false;
           
         }
      //   Debug.Log(Input.GetAxis("Atack"));
+            //  animator.SetTrigger("isAttacking");
+
+
+        }
+      
     }
 
     void FixedUpdate()
@@ -69,14 +77,7 @@ public class PlayerShoot : MonoBehaviour {
             {
 
 
-                if (time >= interval)
-                {
-                    
-                                    //  animator.SetTrigger("isAttacking");
-                    time = 0f;  //初期化
-
-
-                }
+            
             }
         }
 
@@ -97,11 +98,14 @@ public class PlayerShoot : MonoBehaviour {
             //   obj.GetComponent<Rigidbody>().AddForce(rifle.forward * speed);    //銃の向きが元から反転しているため、併せてforwardも反転させる
 
             // transform.LookAt(bullet.transform.position);
-            interval = 0.7f;
+            interval = 1.0f;
 
             //  player.transform.eulerAngles = new Vector3(0.0f, cameracontrol.trueDammyCamRotate.y, 0.0f);
         }
 
 
     }
+
+
+
 }

@@ -20,7 +20,7 @@ public class TargetControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-         target = playerMove.targetEnemy.transform;
+         target = playerMove.targetEnemyPosition.transform;
         rectTransform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, target.position);
     }
 }

@@ -46,11 +46,11 @@ public class FlagsInStageManager : MonoBehaviour {
     public GameObject match;
 
     bool[] mouseButtonFlag = new bool[3];
-
+    private PlayerMove player;
     // Use this for initialization
     void Start()
     {
-        //	player = GameObject.Find("player").GetComponent<playermove>();
+        	player = GameObject.Find("player").GetComponent<PlayerMove>();
         /*animator = GameObject.Find("ActionUI").GetComponent<Animator>();
 		pauseAnim = GameObject.Find("Pausemenu").GetComponent<Animator>();
 		Button1 = GameObject.Find("Button1").GetComponent<Button>();
@@ -81,6 +81,16 @@ public class FlagsInStageManager : MonoBehaviour {
             buttonCount = 0;
         }
 
+        if(batleMode == true)
+        {
+            GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            if(enemys.Length == 0)
+            {
+                player.guardFlag = false;
+                player.guardTime = 0;
+                batleMode = false;
+            }
+        }
 
     }
 

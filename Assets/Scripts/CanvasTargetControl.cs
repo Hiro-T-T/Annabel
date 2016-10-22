@@ -12,7 +12,10 @@ public class CanvasTargetControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	if(flagsInStageManager.batleMode == false)
+        {
+            Destroy(GameObject.Find("CanvasTarget(Clone)"));
+        }
 	}
 
    void canvasTargetAppear()

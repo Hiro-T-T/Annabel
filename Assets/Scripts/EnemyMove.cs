@@ -16,6 +16,6 @@ public class EnemyMove : MonoBehaviour {
 
 
 
-        this.GetComponent<Renderer>().material = materialCol[colNum];
+       // this.GetComponent<Renderer>().material = materialCol[colNum];
 	}
 }

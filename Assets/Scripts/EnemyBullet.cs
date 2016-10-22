@@ -7,18 +7,22 @@ public class EnemyBullet : MonoBehaviour {
     public int lifeTime = 2;
     int second = 0;
     int counter = 0;
-
+    public float damage = 2;
+    private GameObject player;
+    private PlayerMove playerMove;
     void Start()
     {
         second = 0;
         counter = 0;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerMove = player.GetComponent<PlayerMove>();
     }
 
     void Update()
     {
         second++;
         float step = Time.deltaTime * speed;
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
         if(second > 60)
         {
@@ -27,6 +31,29 @@ public class EnemyBullet : MonoBehaviour {
         }
         if(counter > lifeTime)
         {
+            Destroy(gameObject);
+        }
+    }
+    void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == ("Player"))
+        {
+            
+            playerMove.hp -= damage;
+            Destroy(gameObject);
+        }
+        if(col.gameObject.name == ("GuardObj") && playerMove.guardFlag == true)
+        {
+            Debug.Log("大根ガード");
+            if(playerMove.guardTime < 20)
+            {
+                playerMove.guardCounter = true;
+            }
+            else
+            {
+                playerMove.hp -= damage * 0.5f;
+            }
+           
             Destroy(gameObject);
         }
     }
