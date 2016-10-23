@@ -44,6 +44,8 @@ public class PlayerMove : MonoBehaviour {
     private Vector3 CameraRight;
     //カメラダミーの情報取得
     private GameObject cameraDammyObj;
+
+    private int justGuardTime = 0;
     void Start()
     {
         //色々代入
@@ -94,7 +96,31 @@ public class PlayerMove : MonoBehaviour {
             targetMaker.position += new Vector3(0.0f, 0.0f, targetMakerZ);
            // Debug.Log(targetMaker.transform.position);
         }
-  
+
+       
+
+        if (flagsInStageManager.batleMode == true)
+        {
+            playerGuard();
+            if (guardCounter == true)
+            {
+                GameObject counterMagic1 = Resources.Load("CounterMagic1") as GameObject;
+                GameObject justGuardEffect = Resources.Load("JustGuard") as GameObject;
+                GameObject obj = GameObject.Instantiate(counterMagic1) as GameObject;
+               // EffectControl effectControlCounterMagic = obj.GetComponent<EffectControl>();
+                obj.transform.position = targetEnemyPosition.transform.position;
+                GameObject justGuardObj = GameObject.Instantiate(justGuardEffect) as GameObject;
+                GameObject guardObj = GameObject.Find("GuardObj");
+               // EffectControl effectControlGuardObj = guardObj.GetComponent<EffectControl>();
+                justGuardObj.transform.position = guardObj.transform.position;
+                guardCounter = false;
+                //  guardTime = 0;
+
+            }
+        }
+        
+        
+        Debug.Log(guardCounter);
     }
     void FixedUpdate()
     {
@@ -193,19 +219,10 @@ public class PlayerMove : MonoBehaviour {
             airFlagProcess();
             
         }
-        if(flagsInStageManager.batleMode == true)
-        {
-            playerGuard();
-            if(guardCounter == true)
-            {
-                GameObject counterMagic1 = Resources.Load("CounterMagic1") as GameObject;
-                GameObject obj = GameObject.Instantiate(counterMagic1) as GameObject;
-                guardCounter = false;
-            }
-        }
+       
         
     }
-
+    
     GameObject nearEnemySearch()
     {
         float targetDistance = 0.0f;        //ターゲット距離

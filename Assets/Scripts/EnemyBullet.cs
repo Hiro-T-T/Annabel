@@ -47,7 +47,7 @@ public class EnemyBullet : MonoBehaviour {
         if(col.gameObject.name == ("GuardObj") && playerMove.guardFlag == true)
         {
             Debug.Log("大根ガード");
-            if(playerMove.guardTime < 20)
+            if(playerMove.guardTime < playerMove.guardCounterTime)
             {
                 playerMove.guardCounter = true;
             }
