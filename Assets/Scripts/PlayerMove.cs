@@ -249,7 +249,7 @@ public class PlayerMove : MonoBehaviour {
 
     public int guardTime = 0;
     public bool guardCounter = false;
-    public int guardCounterTime = 20;
+    public int guardCounterTime = 7;
     void playerGuard()
     {
         if (Input.GetAxis("Guard") == 1)

@@ -145,13 +145,13 @@ public class MainCameraControl : MonoBehaviour {
         {
             Vector2 playerScreenPos = Camera.main.WorldToScreenPoint(player.transform.position);
             Vector2 enemyScreenPos = Camera.main.WorldToScreenPoint(player.targetEnemyPosition.transform.position);
-            float playerEnemyDistance = Vector2.Distance(playerScreenPos, enemyScreenPos) * 0.1f;
-            if (playerEnemyDistance >= 20) playerEnemyDistance = 20;
+            float playerEnemyDistance = Vector2.Distance(playerScreenPos, enemyScreenPos) * 0.15f;
+            if (playerEnemyDistance >= 15) playerEnemyDistance = 15;
             Debug.Log(playerEnemyDistance);
             //float playerEnemyDistance = Mathf.Abs(Vector3.Distance(player.targetEnemyPosition.transform.position, player.transform.position));
             Vector3 cameraMoveEndPos = player.transform.position - (player.encountPos - player.transform.position);
-            //cameraPosPrevious - playerEnemyDistance * (CameraForward);
-            cameraMoveEndPos -= playerEnemyDistance * (CameraForward);
+            //cameraPosPrevious - playerEnemyDistance * (CameraForward);   {
+            cameraMoveEndPos -= playerEnemyDistance * (CameraForward);            
             cameraMoveEndPos.y = cameraPosPrevious.y;
             Vector3 cameraMovePos = (cameraMoveEndPos - cameraPos) * 0.05f;
             float cameraMoveEndY = cameraPosPrevious.y + 5.0f;
@@ -160,22 +160,26 @@ public class MainCameraControl : MonoBehaviour {
             cameraPos += cameraMovePos * 0.5f;
             cameraPos.y += cameraMoveY;
             battleCameraPosPrevious = transform.position;
-         //   Debug.Log(playerEnemyDistance);
+            //   Debug.Log(playerEnemyDistance);
             //カメラの傾き調整
             // CameraRotate = cameraDammyObj.transform.localEulerAngles;
             //CameraRotate.x = cameraDammyObj.transform.localEulerAngles.x + 20.0f;
 
-            float playerEnemyDistance2 = (playerScreenPos.x - enemyScreenPos.x) * 0.05f;
-            float xRotateEnd = CameraRotate.x + 10.0f;
-            float xRotate = (xRotateEnd - CameraRotate.x) * 0.05f;
-            Vector3 cameraBattleRotate = new Vector3(xRotate, CameraRotate.y, CameraRotate.z);
-            if(player.guardFlag == false)
+            //float playerEnemyDistance2 = (playerScreenPos.x - enemyScreenPos.x) * 0.05f;
+            //float xRotateEnd = CameraRotate.x + 15.0f;
+            //float xRotate = (xRotateEnd - CameraRotate.x) * 0.05f;
+            Vector3 cameraBattleRotate = player.encountPos - transform.position;
+            transform.LookAt(new Vector3(player.encountPos.x, player.targetEnemyPosition.transform.position.y,player.encountPos.z));
+            //Quaternion.Slerp(transform.rotation, player.targetEnemyPosition.transform.rotation, 1.0f);
+            // transform.localEulerAngles = cameraBattleRotate;
+            if (player.guardFlag == false)
             {
                 
-                CameraRotate.y = transform.localEulerAngles.y - playerEnemyDistance2;
-              //  transform.localEulerAngles = cameraBattleRotate;
+                  
+                //CameraRotate.y = transform.localEulerAngles.y - playerEnemyDistance2;
+                
             }
-            transform.LookAt(player.encountPos);
+          
         }
 
 
