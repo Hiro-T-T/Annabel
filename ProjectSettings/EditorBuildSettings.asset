@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/hoshi.unity
   - enabled: 1
     path: Assets/Scenes/tadano.unity
+  - enabled: 1
+    path: Assets/Scenes/stage1.unity

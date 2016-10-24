@@ -10,7 +10,7 @@ public class BlueDoorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(bmg.imgEn == true)
+	    if(bmg.blDst == true)
         {
             Destroy(gameObject);
         }

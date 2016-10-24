@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BlueImg : MonoBehaviour {
 
     public bool imgEn = false;
+    public bool blDst = false;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,8 @@ public class BlueImg : MonoBehaviour {
     void Update () {
 	    if(imgEn == true)
         {
+            blDst = true;
+            imgEn = false;
             Invoke("blT", 1.5f);
         }
     }
@@ -29,7 +32,6 @@ public class BlueImg : MonoBehaviour {
 
     public void ImgOff()
     {
-        imgEn = false;
         gameObject.GetComponent<Image>().enabled = false;
 
     }
