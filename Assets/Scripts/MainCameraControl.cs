@@ -168,7 +168,7 @@ public class MainCameraControl : MonoBehaviour {
             //カメラの傾き調整
 
            EnemyTargetPosMove enemyTargetPosMove = GameObject.Find("EnemyTargetPos").GetComponent<EnemyTargetPosMove>();
-           transform.LookAt(enemyTargetPosMove.transform.position);
+           transform.LookAt(new Vector3(enemyTargetPosMove.transform.position.x,player.targetEnemyPosition.transform.position.y,enemyTargetPosMove.transform.position.z));
 
             //transform.LookAt(cameraBattleRotate);
             //Quaternion.Slerp(transform.rotation, player.targetEnemyPosition.transform.rotation, 1.0f);
