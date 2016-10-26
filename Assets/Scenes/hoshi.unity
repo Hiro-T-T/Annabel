@@ -1606,6 +1606,7 @@ MonoBehaviour:
   matchNowTimeCount: 0
   matchStartPos: {x: 0, y: 0, z: 0}
   batleMode: 0
+  cameraMode: 0
   gameOverChangeSceneName: 
   animator: {fileID: 0}
   pauseAnim: {fileID: 0}

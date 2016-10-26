@@ -157,8 +157,11 @@ public class PlayerMove : MonoBehaviour {
             Vector3 playerRemovePos = transform.position;
             //移動
             //     moveDirection += (moveSpeed * Input.GetAxis("Horizontal")) * CameraRight + (moveSpeed * Input.GetAxis("Vertical")) * CameraForward;
-
-            moveDirection += (moveSpeed * Input.GetAxis("Horizontal")) * CameraRight + (moveSpeed * Input.GetAxis("Vertical")) * CameraForward;
+            if(flagsInStageManager.cameraMode == false)
+            {
+                moveDirection += (moveSpeed * Input.GetAxis("Horizontal")) * CameraRight + (moveSpeed * Input.GetAxis("Vertical")) * CameraForward;
+            }
+            
 
             if (Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") != 0.0f)
             {
@@ -199,8 +202,11 @@ public class PlayerMove : MonoBehaviour {
 
             if (pushKeyFlag == true)
             {
-                Quaternion q = Quaternion.LookRotation(moveDirection);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 20.0f);
+                if (flagsInStageManager.cameraMode == false)
+                {
+                    Quaternion q = Quaternion.LookRotation(moveDirection);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 20.0f);
+                }
             }
 
 

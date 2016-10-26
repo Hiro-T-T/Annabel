@@ -56,8 +56,9 @@ public class CameraControl : MonoBehaviour {
             //   mousepos = Input.mousePosition;
 
 
-            //マウスの移動値で回転させる
-            dammyCamRotate.y += Input.GetAxis("Horizontal") * rotateSpeed;
+            //回転
+            dammyCamRotate.y += (Input.GetAxis("Horizontal") * rotateSpeed) + (Input.GetAxis("Mouse X") * rotateSpeed * 2.0f);
+       
             //dammyCamRotate.x -= Input.GetAxis("Horizontal") * rotateSpeed;
 
             //   if (Mathf.Abs(Input.GetAxis("Mouse XD")) > 0.5f) dammyCamRotate.y -= Input.GetAxis("Mouse XD") * rotateSpeed;

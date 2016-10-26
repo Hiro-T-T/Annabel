@@ -19,6 +19,7 @@ public class FlagsInStageManager : MonoBehaviour {
     public float matchNowTimeCount = 0.0f;
     public Vector3 matchStartPos = new Vector3(0.0f, 0.0f, 0.0f);
     public bool batleMode = false;
+    public bool cameraMode = false;
     private MainCameraControl mainCameraControl;
     //   Button Button1;
 
@@ -70,6 +71,8 @@ public class FlagsInStageManager : MonoBehaviour {
     void Update()
     {
 
+        Cursor.lockState = CursorLockMode.Locked;
+
         if (stageStarted == true && gameClear == false && gameOver == false) pauseProcess();
         stageUnlock();
 
@@ -86,7 +89,8 @@ public class FlagsInStageManager : MonoBehaviour {
             buttonCount = 0;
         }
         //戦闘終了処理
-        if(batleMode == true)
+        
+        if (batleMode == true)
         {
             GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
             if(enemys.Length == 0)
@@ -97,7 +101,13 @@ public class FlagsInStageManager : MonoBehaviour {
                 batleMode = false;
             }
         }
-
+        //カメラモード処理
+        if (Input.GetAxis("Camera") == 1)
+        {
+            if(batleMode == false) cameraMode = true;
+        }
+        else cameraMode = false;
+        Debug.Log(cameraMode);
     }
 
     // Update is called once per frame
