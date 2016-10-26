@@ -179,7 +179,7 @@ public class PlayerMove : MonoBehaviour {
             {
               //  animator.SetBool("isRunning", false); //走るアニメーションオフ
             }
-
+            /*
             //慣性制限
             if (moveDirection.magnitude > moveMaxInAir)
             {
@@ -192,7 +192,7 @@ public class PlayerMove : MonoBehaviour {
                 addDirectionMaxInAir = moveDirection.magnitude;
                 moveDirection = moveDirection.normalized * addDirectionMaxInAir;
             }
-
+            */
             moveDirectionMagnitudeRe1fInAir = moveDirection.magnitude;
 
             //addDirectionMaxInAir = moveDirection.magnitude;

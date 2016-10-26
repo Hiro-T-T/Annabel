@@ -19,6 +19,7 @@ public class FlagsInStageManager : MonoBehaviour {
     public float matchNowTimeCount = 0.0f;
     public Vector3 matchStartPos = new Vector3(0.0f, 0.0f, 0.0f);
     public bool batleMode = false;
+    private MainCameraControl mainCameraControl;
     //   Button Button1;
 
     private bool startTrigger = false;
@@ -47,10 +48,14 @@ public class FlagsInStageManager : MonoBehaviour {
 
     bool[] mouseButtonFlag = new bool[3];
     private PlayerMove player;
+
+    private CameraControl cameraControl;
     // Use this for initialization
     void Start()
     {
         	player = GameObject.Find("player").GetComponent<PlayerMove>();
+        cameraControl = GameObject.Find("CameraDammy").GetComponent<CameraControl>();
+        mainCameraControl = Camera.main.GetComponent<MainCameraControl>();
         /*animator = GameObject.Find("ActionUI").GetComponent<Animator>();
 		pauseAnim = GameObject.Find("Pausemenu").GetComponent<Animator>();
 		Button1 = GameObject.Find("Button1").GetComponent<Button>();
@@ -80,7 +85,7 @@ public class FlagsInStageManager : MonoBehaviour {
         {
             buttonCount = 0;
         }
-
+        //戦闘終了処理
         if(batleMode == true)
         {
             GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
@@ -88,6 +93,7 @@ public class FlagsInStageManager : MonoBehaviour {
             {
                 player.guardFlag = false;
                 player.guardTime = 0;
+                cameraControl.transform.eulerAngles = mainCameraControl.transform.localEulerAngles;
                 batleMode = false;
             }
         }

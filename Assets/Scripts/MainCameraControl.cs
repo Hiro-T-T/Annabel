@@ -37,6 +37,8 @@ public class MainCameraControl : MonoBehaviour {
     private Vector3 rayDirection =new Vector3(0.0f,-1.0f,0.0f);
 
     public Vector3 battleCameraX = new Vector3(0.0f, 0.0f, 0.0f);
+    
+    private int battleEndTime = 0;
 
     // Use this for initialization
     void Start()
@@ -49,17 +51,14 @@ public class MainCameraControl : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (flagsInStageManager.batleMode == false)
         {
 
-            //カメラをダミーの位置へ持っていく
-            Vector3 cameraMovePos = cameraDammyObj.transform.position;
-
-          
-            
+        //カメラをダミーの位置へ持っていく
+        Vector3 cameraMovePos = cameraDammyObj.transform.position;
 
         //カメラダミー正面方向取得
         CameraForward = cameraDammyObj.transform.TransformDirection(Vector3.forward);
@@ -82,7 +81,7 @@ public class MainCameraControl : MonoBehaviour {
             CameraMoveRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
            // CameraRotate.x -= Mathf.RoundToInt(rad * stageRiseRotateY);
 
-                CameraRotate += (CameraMoveRotate - CameraRotate);
+            CameraRotate = CameraMoveRotate;
             
 
             transform.localEulerAngles = CameraRotate;
@@ -139,37 +138,39 @@ public class MainCameraControl : MonoBehaviour {
             transform.position = cameraPos;
             cameraPosPrevious = transform.position;
         }
-        Debug.Log(CameraForward);
+      //Debug.Log(CameraForward);
+
+        //バトルカメラワーク設定。後できれいにします
 
         if (flagsInStageManager.batleMode == true)
         {
+            battleEndTime = 0;
             Vector2 playerScreenPos = Camera.main.WorldToScreenPoint(player.transform.position);
             Vector2 enemyScreenPos = Camera.main.WorldToScreenPoint(player.targetEnemyPosition.transform.position);
             float playerEnemyDistance = Vector2.Distance(playerScreenPos, enemyScreenPos) * 0.15f;
-            if (playerEnemyDistance >= 15) playerEnemyDistance = 15;
-            Debug.Log(playerEnemyDistance);
-            //float playerEnemyDistance = Mathf.Abs(Vector3.Distance(player.targetEnemyPosition.transform.position, player.transform.position));
+            if (playerEnemyDistance >= 10) playerEnemyDistance = 10;
+          
             Vector3 cameraMoveEndPos = player.transform.position - (player.encountPos - player.transform.position);
-            //cameraPosPrevious - playerEnemyDistance * (CameraForward);   {
+           
             cameraMoveEndPos -= playerEnemyDistance * (CameraForward);            
             cameraMoveEndPos.y = cameraPosPrevious.y;
+
             Vector3 cameraMovePos = (cameraMoveEndPos - cameraPos) * 0.05f;
-            float cameraMoveEndY = cameraPosPrevious.y + 5.0f;
+
+            float cameraMoveEndY = cameraPosPrevious.y + 4.0f;
             float cameraMoveY = (cameraMoveEndY - cameraPos.y) * 0.05f;
+
             //バトルカメラの距離を設定
             cameraPos += cameraMovePos * 0.5f;
             cameraPos.y += cameraMoveY;
             battleCameraPosPrevious = transform.position;
-            //   Debug.Log(playerEnemyDistance);
-            //カメラの傾き調整
-            // CameraRotate = cameraDammyObj.transform.localEulerAngles;
-            //CameraRotate.x = cameraDammyObj.transform.localEulerAngles.x + 20.0f;
 
-            //float playerEnemyDistance2 = (playerScreenPos.x - enemyScreenPos.x) * 0.05f;
-            //float xRotateEnd = CameraRotate.x + 15.0f;
-            //float xRotate = (xRotateEnd - CameraRotate.x) * 0.05f;
-            Vector3 cameraBattleRotate = player.encountPos - transform.position;
-            transform.LookAt(new Vector3(player.encountPos.x, player.targetEnemyPosition.transform.position.y,player.encountPos.z));
+            //カメラの傾き調整
+
+           EnemyTargetPosMove enemyTargetPosMove = GameObject.Find("EnemyTargetPos").GetComponent<EnemyTargetPosMove>();
+           transform.LookAt(enemyTargetPosMove.transform.position);
+
+            //transform.LookAt(cameraBattleRotate);
             //Quaternion.Slerp(transform.rotation, player.targetEnemyPosition.transform.rotation, 1.0f);
             // transform.localEulerAngles = cameraBattleRotate;
             if (player.guardFlag == false)
