@@ -78,9 +78,9 @@ public class TalkSettings : MonoBehaviour
         talk.setTalk(100, 8.0f,  "？？？", "・・・？あの熊のぬいぐるみ・・・。浮いてる・・・？");
         talk.setTalk(100, 5.0f,  "？？？", "ひぃ！！お、襲ってきた！！");
 
+
         talk.setTalk(101, 3.0f, "？？？", "なにか声が聞こえる・・・？");
         talk.setTalk(101, 5.0f, "？？？", "詩・・・？");
-        talk.setTalk(101, 7.0f, "少女の声", "わからない、家で普通に寝たはずじゃ・・・？");
         talk.setTalk(101, 8.0f, "少女の声", "それはそれは昔のこと");
         talk.setTalk(101, 5.0f, "少女の声", "海際の街に一人の乙女が住んでいた");
         talk.setTalk(101, 8.0f, "少女の声", "その名は・・・");
@@ -99,10 +99,7 @@ public class TalkSettings : MonoBehaviour
         talk.setTalk(103, 8.0f, "少女の声", "美しい「アナベル」を");
         talk.setTalk(103, 8.0f, "少女の声", "そこで天上から使者が来て");
         talk.setTalk(103, 8.0f, "少女の声", "彼女を海から取り上げて遺跡の中に閉じ込めてしまった");
-        talk.setTalk(103, 8.0f, "少女の声", "深く閉じた遺跡に中に");
-
-
-
+        talk.setTalk(103, 8.0f, "少女の声", "深く閉じた遺跡の中に");
 
         talk.endTalk();
 
