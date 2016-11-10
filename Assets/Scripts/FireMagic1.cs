@@ -43,9 +43,9 @@ public class FireMagic1 : MonoBehaviour {
         bezierHalfPoint.z = Random.Range(playerTransform.z, enemyTransform.z) + tamaPointDirection;
     }
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
-        t += tAdd;
+        t += Time.deltaTime * 2.5f;
 	if(targetObj != null)
         {
             

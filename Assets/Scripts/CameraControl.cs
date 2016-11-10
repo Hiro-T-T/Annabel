@@ -43,7 +43,7 @@ public class CameraControl : MonoBehaviour {
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         MainCamera = MainCameraObj.transform.GetComponent<MainCameraControl>();
         CameraAngle = Vector3.zero;
-
+        Application.targetFrameRate = 60;
        
 
     }
