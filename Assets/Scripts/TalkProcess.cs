@@ -251,7 +251,7 @@ public class TalkProcess : MonoBehaviour {
 		sTalkWindow = Resources.Load("CanvasTalkMini") as GameObject ;
 		bTalkWindow = Resources.Load("CanvasTalkBig") as GameObject ;
 
-		talksetting = GameObject.Find("GameControlObject").GetComponent<TalkSettings>();
+		talksetting = GameObject.Find("GameObject").GetComponent<TalkSettings>();
 
 	//	audioSource = gameObject.GetComponent<AudioSource>();
 
