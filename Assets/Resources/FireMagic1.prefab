@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  tAdd: 0.03
+  tAdd: 0.1
 --- !u!135 &135000012778407436
 SphereCollider:
   m_ObjectHideFlags: 1

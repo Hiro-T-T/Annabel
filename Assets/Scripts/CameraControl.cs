@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour {
     public Vector3 dammyCampos = new Vector3(0.0f, 0.0f, 0.0f);     //カメラ座標	
-    public Vector3 dammyCamRotate = new Vector3(0.0f, 0.0f, 0.0f);  //カメラ回転値
+    public Vector3 dammyCamRotate = new Vector3(0.0f, 180.0f, 0.0f);  //カメラ回転値
     public float dammyCamRotateSpeed = 4.0f;                            //カメラ回転スピード
     public Vector3 trueDammyCamRotate = Vector3.zero;                   //こっちがゲームへ反映するカメラ回転値
     public float camRotateDig = 0.5f;
@@ -43,6 +43,9 @@ public class CameraControl : MonoBehaviour {
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         MainCamera = MainCameraObj.transform.GetComponent<MainCameraControl>();
         CameraAngle = Vector3.zero;
+
+       
+
     }
 
     // Update is called once per frame
@@ -52,8 +55,8 @@ public class CameraControl : MonoBehaviour {
     }
     void FixedUpdate()
     {
-         
-     
+      
+
         if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0)
         {
             
@@ -77,7 +80,7 @@ public class CameraControl : MonoBehaviour {
                 {
                     if (player.pushKeyFlag == true)
                     {
-                        moveSpeedBattle = 0.005f;
+                        moveSpeedBattle = 0.015f;
                     }
                     else
                     {

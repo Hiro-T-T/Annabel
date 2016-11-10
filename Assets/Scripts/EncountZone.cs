@@ -67,9 +67,9 @@ public class EncountZone : MonoBehaviour {
     {
         int i = 0;
 
-        float MaxX = childPos.x + Mathf.Abs(distancePos.x);
-        float MaxZ = childPos.z + Mathf.Abs(distancePos.z);
-
+        float MaxX = childPos.x - distancePos.x;
+        float MaxZ = childPos.z - distancePos.z;
+        Debug.Log(MaxX);
         foreach(GameObject appearEnemy in enemy)
         {
 

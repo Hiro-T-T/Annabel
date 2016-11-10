@@ -48,9 +48,13 @@ public class PlayerShoot : MonoBehaviour {
         {
               if (Input.GetAxis("Attack") == 1 && attack == false)
         {
-            ShootTama();    //発砲
-            attack = true;
-            time = 0f;  //初期化
+                if(flagsInStageManager.batleMode == true)
+                {
+                    ShootTama();    //発砲
+                    attack = true;
+                    time = 0f;  //初期化
+                }
+   
 
 
             }
