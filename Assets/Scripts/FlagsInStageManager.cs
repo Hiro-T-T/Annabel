@@ -44,7 +44,7 @@ public class FlagsInStageManager : MonoBehaviour {
     public bool helpFlag = false;
     public bool optionFlag = false;
 
-  //  TalkProcess talk;
+    TalkProcess talk;
     public GameObject match;
 
     bool[] mouseButtonFlag = new bool[3];
@@ -57,6 +57,7 @@ public class FlagsInStageManager : MonoBehaviour {
         	player = GameObject.Find("player").GetComponent<PlayerMove>();
         cameraControl = GameObject.Find("CameraDammy").GetComponent<CameraControl>();
         mainCameraControl = Camera.main.GetComponent<MainCameraControl>();
+        talk = GameObject.Find("GameControlObject").GetComponent<TalkProcess>();
         /*animator = GameObject.Find("ActionUI").GetComponent<Animator>();
 		pauseAnim = GameObject.Find("Pausemenu").GetComponent<Animator>();
 		Button1 = GameObject.Find("Button1").GetComponent<Button>();
@@ -64,14 +65,14 @@ public class FlagsInStageManager : MonoBehaviour {
 		{
 	//		stageClearProcess = GameObject.Find("ClearFlagObject").GetComponent<stageClearedFlag>();
 		}*/
- /////////       talk = GameObject.Find("GameControlObject").GetComponent<TalkProcess>();
+        /////////       
         //match = Resources.Load("Prefab/GameMainObjects/Match") as GameObject ;
     }
 
     void Update()
     {
 
-        Cursor.lockState = CursorLockMode.Locked;
+    //    Cursor.lockState = CursorLockMode.Locked;
 
         if (stageStarted == true && gameClear == false && gameOver == false) pauseProcess();
         stageUnlock();

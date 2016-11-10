@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour {
     public float moveFrictionPow = 0.3f;
 
     bool playerInAirFlag = true;                                                //空中かどうか
-
+    public bool pushKeyFlag = false;
     private int jumpCount = 5;
     FlagsInStageManager flagsInStageManager;
 
@@ -63,7 +63,11 @@ public class PlayerMove : MonoBehaviour {
 
     void Update()
     {
-        Vector2 pos = Camera.main.ScreenToWorldPoint(transform.position);
+        if(flagsInStageManager.batleMode == false)
+        {
+            Vector2 pos = Camera.main.ScreenToWorldPoint(transform.position);
+        }
+        
      //   Debug.Log(pos);
 
         if (hp <= 0)
@@ -124,7 +128,7 @@ public class PlayerMove : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        bool pushKeyFlag = false;
+        pushKeyFlag = false;
         //カメラ正面方向取得
 
             CameraForward = Camera.main.transform.TransformDirection(Vector3.forward);
