@@ -180,11 +180,11 @@ public class PlayerMove : MonoBehaviour {
             {
 
                 //   moveDirection += (moveDirection.normalized * moveSpeed) / 50;
-              //  animator.SetBool("isRunning", true); //走るアニメーションオン
+              animator.SetBool("isRunning", true); //走るアニメーションオン
             }
             else
             {
-              //  animator.SetBool("isRunning", false); //走るアニメーションオフ
+              animator.SetBool("isRunning", false); //走るアニメーションオフ
             }
             /*
             //慣性制限

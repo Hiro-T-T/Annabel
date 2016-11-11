@@ -50,6 +50,8 @@ public class PlayerShoot : MonoBehaviour {
         {
                 if(flagsInStageManager.batleMode == true)
                 {
+                    animator.SetTrigger("isAttacking");
+
                     ShootTama();    //発砲
                     attack = true;
                     time = 0f;  //初期化
@@ -64,7 +66,7 @@ public class PlayerShoot : MonoBehaviour {
           
         }
      //   Debug.Log(Input.GetAxis("Atack"));
-            //  animator.SetTrigger("isAttacking");
+           // animator.SetTrigger("isAttacking");
 
 
         }

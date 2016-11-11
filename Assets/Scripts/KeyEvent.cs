@@ -4,13 +4,11 @@ using UnityEngine.UI;
 
 public class KeyEvent : MonoBehaviour {
 
-    private GameManager gm;
-    public RedImg redImg;
+    public DoorController redDoor;
 
 	// Use this for initialization
 	void Start () {
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        redImg = GameObject.Find("RedDoor").GetComponent<RedImg>();
+        redDoor = GameObject.Find("RedDoor").GetComponent<DoorController>();
 	}
 	
 	// Update is called once per frame
@@ -27,8 +25,8 @@ public class KeyEvent : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            redImg.ImgOn = true;
-            gm.door = true;
+            redDoor.open = true;
+            Debug.Log("open");
             Destroy(gameObject);
         }
     }

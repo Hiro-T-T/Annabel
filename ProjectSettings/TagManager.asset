@@ -9,6 +9,7 @@ TagManager:
   - Target
   - EnemyAtack
   - TalkTrigger
+  - GM
   layers:
   - Default
   - TransparentFX
