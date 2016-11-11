@@ -3059,7 +3059,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010326375712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.3, y: 0.87, z: 42}
+  m_LocalPosition: {x: -1.8, y: 0.87, z: 1.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -3396,7 +3396,7 @@ Camera:
   m_GameObject: {fileID: 1000011573182754}
   m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -3655,10 +3655,10 @@ Animator:
   m_GameObject: {fileID: 1000010273261946}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 635a7c06b3dcc8149a65c05e7cd8407b, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
+  m_Controller: {fileID: 9100000, guid: e6ac926f58a4bae48aba98ff159e7d05, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -3742,7 +3742,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.2794118, g: 0.8210952, b: 1, a: 1}
   m_Intensity: 2.09
-  m_Range: 300
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:

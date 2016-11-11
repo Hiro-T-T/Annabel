@@ -3,8 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    public bool door = false;
-    public bool end = false;
+    public int stateCount = 0;
 
 	// Use this for initialization
 	void Start () {

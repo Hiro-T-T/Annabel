@@ -4,20 +4,20 @@ using UnityEngine.UI;
 
 public class TreasureEvent : MonoBehaviour {
 
-    public BlueImg blImg;
+    public DoorController blueDoor;
     private bool treOn = false;
 
     void Start()
     {
         treOn = false;
-        blImg = GameObject.Find("BlueDoor").GetComponent<BlueImg>(); 
+        blueDoor = GameObject.Find("BlueDoor").GetComponent<DoorController>(); 
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.CompareTag("Player") && treOn == false)
+        if (col.gameObject.CompareTag("Player") && Input.GetAxis("Attack") == 1 && treOn == false)
         {
-            blImg.imgEn = true;
+            blueDoor.open = true;
             treOn = true;
             this.GetComponent<Animator>().SetTrigger("onTrigger");
         }
