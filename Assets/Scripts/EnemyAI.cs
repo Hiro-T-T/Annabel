@@ -17,16 +17,27 @@ public class EnemyAI : MonoBehaviour {
     Vector3 playerTransform = new Vector3(0.0f, 0.0f, 0.0f);
     Vector3 targetTransform = new Vector3(0.0f, 0.0f, 0.0f);
 
+    public int enemyMode = 0;
+    /*-------------------------------------------------
+    0 = ドール
+    1 = どくろ
+
+    *///-----------------------------------------------
 
     // Use this for initialization
     void Start()
     {
-        this.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        this.transform.rotation = new Quaternion(0, transform.rotation.y, 0, 0);
         player = GameObject.FindGameObjectWithTag("Player");
-        transform.LookAt(new Vector3(player.transform.position.x, 0.0f, player.transform.position.z));   //プレイヤーの方を向く
-        targetTransform = player.transform.position;
-        playerTransformPrevious = targetTransform;
+
+        if(enemyMode == 0)
+        {
+            this.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            this.transform.rotation = new Quaternion(0, transform.rotation.y, 0, 0);
+            transform.LookAt(new Vector3(player.transform.position.x, 0.0f, player.transform.position.z));   //プレイヤーの方を向く
+            targetTransform = player.transform.position;
+            playerTransformPrevious = targetTransform;
+        }
+
 
 
         // count = GameObject.Find("GameManager").GetComponent<GameManager>().counter;
@@ -35,45 +46,8 @@ public class EnemyAI : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        count += Time.deltaTime;
-  //      Debug.Log(count);
-        if(moveMode == 0)
-        {
-            attackTime = Random.Range(1, 3);
-        
-            moveMode = 1;
-        }
-        if(moveMode == 1)
-        {
-            if(count > attackTime)
-            {
-                playerTransform = player.transform.position;
-                moveMode = 2;
-            }
-        }
-        if(moveMode == 2)
-        {
-            targetTransform += (playerTransform - targetTransform) * 0.1f;
-            transform.LookAt(new Vector3(targetTransform.x, 0.0f, targetTransform.z));
-
-            Debug.Log("目標位置" + targetTransform);
-            if((attackTime + 1) < count)
-            {
-               GameObject obj = Instantiate(Resources.Load("E_bullet"),transform.position, Quaternion.identity) as GameObject;
-                EnemyBullet enemyBullet = obj.GetComponent<EnemyBullet>();
-                enemyBullet.targetFoward = transform.forward;
-                Debug.Log("新宿");
-                count = 0;
-                moveMode = 0;
-            }
-            /*if((attackTime + 3) < count)
-            {
-                
-               
-            }
-            */
-        }
-          Debug.Log("攻撃" + attackTime);
+        enemyAction(enemyMode);
+       
         if (hp <= 0)
         {
             Destroy(gameObject);
@@ -96,5 +70,58 @@ public class EnemyAI : MonoBehaviour {
         }
  
         */
+    }
+    void enemyAction(int enemyModeNum)
+    {
+        //ドール
+        if(enemyModeNum == 0)
+        {
+            count += Time.deltaTime;
+            //      Debug.Log(count);
+            if (moveMode == 0)
+            {
+                attackTime = Random.Range(1, 3);
+
+                moveMode = 1;
+            }
+            if (moveMode == 1)
+            {
+                if (count > attackTime)
+                {
+                    playerTransform = player.transform.position;
+                    moveMode = 2;
+                }
+            }
+            if (moveMode == 2)
+            {
+                targetTransform += (playerTransform - targetTransform) * 0.1f;
+                transform.LookAt(new Vector3(targetTransform.x, 0.0f, targetTransform.z));
+
+                Debug.Log("目標位置" + targetTransform);
+                if ((attackTime + 1) < count)
+                {
+                    GameObject obj = Instantiate(Resources.Load("E_bullet"), transform.position, Quaternion.identity) as GameObject;
+                    EnemyBullet enemyBullet = obj.GetComponent<EnemyBullet>();
+                    enemyBullet.targetFoward = transform.forward;
+                    Debug.Log("新宿");
+                    count = 0;
+                    moveMode = 0;
+                }
+                /*if((attackTime + 3) < count)
+                {
+
+
+                }
+                */
+            }
+            Debug.Log("攻撃" + attackTime);
+        }
+
+        //ドクロ
+        if(enemyMode == 1)
+        {
+
+        }
+       
     }
 }

@@ -25,7 +25,7 @@ public class EnemyBullet : MonoBehaviour {
     void FixedUpdate()
     {
         counter += Time.deltaTime;
-        transform.position += targetFoward * Time.deltaTime * 8;
+        transform.position += targetFoward * Time.deltaTime * speed;
         transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
         if(counter > lifeTime || flagsInStageManager.batleMode == false)
         {

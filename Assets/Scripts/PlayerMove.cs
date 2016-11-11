@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour {
 
     public float hp = 10.0f;
     public bool guardFlag = false;
-
+    public Quaternion q;
     public float moveSpeed = 0.3f;                                              //地上時移動速度
     public float movePowInAir = 0.02f;                                          //空中での移動にかかる強さ
     public float moveMaxInAir = 0.3f;                                           //空中での感性限界値
@@ -138,8 +138,9 @@ public class PlayerMove : MonoBehaviour {
 
 
 
-        if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0 && guardFlag == false)
+        if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0 && guardFlag == false && playerShoot.attack == false)
         {
+            animator.SetBool("isRunning", false);
             if (playerInAirFlag == false)
             {
                 jumpCount = 0;
@@ -208,7 +209,7 @@ public class PlayerMove : MonoBehaviour {
             {
                 if (flagsInStageManager.cameraMode == false)
                 {
-                    Quaternion q = Quaternion.LookRotation(moveDirection);
+                    q = Quaternion.LookRotation(moveDirection);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 20.0f);
                 }
             }

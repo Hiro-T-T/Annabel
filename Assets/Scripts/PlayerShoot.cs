@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour {
    private GameObject trg;
     public float speed = 1000f;
 
-    private bool attack = false;
+    public bool attack = false;
 
     private GameObject player;
     //private GameObject camera;
@@ -96,6 +96,8 @@ public class PlayerShoot : MonoBehaviour {
     //発砲関数
     void ShootTama()
     {
+        transform.LookAt(new Vector3(playerMove.targetEnemyPosition.transform.position.x, 0.0f, playerMove.targetEnemyPosition.transform.position.z));
+
         for (int i = 0; i < 3; i++)
         {
             GameObject obj = GameObject.Instantiate(bullet) as GameObject;

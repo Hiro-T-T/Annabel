@@ -8,10 +8,12 @@ public class FairyMove : MonoBehaviour {
     Vector3 fairyMoveEndPos = new Vector3(0.0f, 0.0f, 0.0f);
     Vector3 fairyMovePos = new Vector3(0.0f, 0.0f, 0.0f);
     GameObject player;
+    PlayerMove playerMove;
     FlagsInStageManager flagsInStageManager;
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerMove = player.GetComponent<PlayerMove>();
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         transform.position = player.transform.position - playerDistance;
     }
@@ -24,9 +26,9 @@ public class FairyMove : MonoBehaviour {
         //カメラダミー横方向取得
         playerRight = player.transform.TransformDirection(Vector3.right);
 
+        transform.rotation = Quaternion.RotateTowards(player.transform.rotation, playerMove.q, 20.0f);
 
-
-       fairyMoveEndPos = player.transform.position;
+        fairyMoveEndPos = player.transform.position;
 
        fairyMoveEndPos += playerDistance;
 

@@ -80,7 +80,7 @@ public class CameraControl : MonoBehaviour {
                 {
                     if (player.pushKeyFlag == true)
                     {
-                        moveSpeedBattle = 0.015f;
+                        moveSpeedBattle = 0.010f;
                     }
                     else
                     {
@@ -157,7 +157,6 @@ public class CameraControl : MonoBehaviour {
                 angle2 = keepAngle2;
 
                 CameraAngle = new Vector3(-5.0f - MainCamera.trueCameraDistance * 0.4f, 360.0f / 6.28f * lookAngle, 0.0f);
-
                 transform.eulerAngles = CameraAngle;
 
             }
