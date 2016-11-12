@@ -7,6 +7,12 @@ public class GameManager : MonoBehaviour {
     public int stateCount = 0;
     public int doorImgCount = 0;
     public int hintNum = 0;
+    public static int sceneNumber = 0;
+
+    public static int getSceneNumber()
+    {
+        return sceneNumber;
+    }
 
 	// Use this for initialization
 	void Start () {

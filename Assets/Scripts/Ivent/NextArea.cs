@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class NextArea : MonoBehaviour {
 
-    private int stg;
+    private int stg = 0;
+    int changeSceneNumber = 0;
 
     public enum NextScene
     {
@@ -21,9 +22,11 @@ public class NextArea : MonoBehaviour {
         {
             case NextScene.stage1:
                 stg = 2;
+                changeSceneNumber = 4;
                 break;
             case NextScene.stage2:
-                stg = 3;
+                stg = 2;
+                changeSceneNumber = 5;
                 break;
             case NextScene.stage3:
                 stg = 4;
@@ -41,6 +44,7 @@ public class NextArea : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            GameManager.sceneNumber = changeSceneNumber;
             SceneManager.LoadScene(stg);
         }
     }
