@@ -127,6 +127,9 @@ public class TalkSettings : MonoBehaviour
         talk.setTalk(300, 8.0f, "妖精人形", "・・・ありがとね");
         talk.setTalk(300, 8.0f, "主人公", "お礼なんていらないよ。さぁ、行こう");
 
+        talk.setTalk(400, 8.0f, "主人公", "この岩を破壊するにはどうすればいいんだろう…");
+        talk.setTalk(400, 8.0f, "妖精人形", "さっき見つけた魔導書を貸して！");
+        talk.setTalk(400, 8.0f, "妖精人形", "はぁぁぁあああ！");
 
         talk.setTalk(103, 8.0f, "少女の声", "しかし彼女に不幸が訪れた");
         talk.setTalk(103, 8.0f, "少女の声", "海際の街で");

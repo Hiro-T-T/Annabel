@@ -6,6 +6,11 @@ public class DoorController : MonoBehaviour {
     public int doorCount = 0;
     public int stage = 0;
     public bool open = false;
+    bool enter = false;
+
+    TalkProcess talk;
+    FlagsInStageManager fm;
+
 
     GameManager gm;
 
@@ -24,7 +29,9 @@ public class DoorController : MonoBehaviour {
 	void Start () {
         doorCount = 0;
         open = false;
+        fm = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
+        talk = GameObject.Find("GameControlObject").GetComponent<TalkProcess>();
         switch (doorType)
         {
             // ドアの種類とステージの判別
@@ -76,24 +83,35 @@ public class DoorController : MonoBehaviour {
         switch (stage)
         {
             case 1:
-                if (col.gameObject.CompareTag("Player") && Input.GetAxis("Attack") == 1 && gm.stateCount == doorCount)
+                if (col.gameObject.CompareTag("Player") && Input.GetAxis("Attack") == 1 && gm.stateCount == doorCount )
                 {
                     if(doorCount == 1)
                     {
                         gm.hintNum = 2;
                     }
-                    switch (doorCount)
+                    if(enter == false)
                     {
-                        case 1:
-                            gm.hintNum = 2;
-                            break;
-                        case 3:
-                            gm.hintNum = 5;
-                            break;
+                        switch (doorCount)
+                        {
+                            case 1:
+                                gm.hintNum = 2;
+                                break;
+                            case 3:
+                                talk.endTalk();
+                                talk.playTalk(400, 0);
+                                enter = true;
+                                gm.hintNum = 5;
+                                break;
+                        }
                     }
-                    gm.doorImgCount = doorCount;
-                    Instantiate(Resources.Load("CounterMagic1"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-                    Destroy(gameObject);
+                    
+                    if(fm.talkMode != 0)
+                    {
+                        gm.doorImgCount = doorCount;
+                        Instantiate(Resources.Load("CounterMagic1"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                        Destroy(gameObject);
+                    } 
+                    
                 }
                 break;
         }
