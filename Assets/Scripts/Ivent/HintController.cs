@@ -30,7 +30,7 @@ public class HintController : MonoBehaviour {
         switch (stageType)
         {
             case StageType.Tutorial:
-                hintNumber = gm.stateCount;
+                hintNumber = gm.tutorialState;
                 // hintNumber = 1;
                 TutorialHint();
                 break;

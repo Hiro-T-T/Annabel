@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour {
 
@@ -79,6 +80,7 @@ public class PlayerMove : MonoBehaviour {
         if (hp <= 0)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene(6);
         }
 
         moveDirection.y = 0.0f;

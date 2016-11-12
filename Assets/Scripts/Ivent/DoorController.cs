@@ -63,7 +63,7 @@ public class DoorController : MonoBehaviour {
             case 0:
                 if (open == true)
                 {
-                    gm.stateCount = doorCount;
+                    gm.tutorialState = doorCount;
                     Debug.Log("Des");
                     Destroy(this.gameObject);
                 }

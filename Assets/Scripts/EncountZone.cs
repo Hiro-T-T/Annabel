@@ -16,7 +16,8 @@ public class EncountZone : MonoBehaviour {
     bool EncFlag = true;
     bool BattleCount = false;
     GameManager gm;
-    public int EncountNumber = 0;
+    public int encountNumber = 0;
+    public int stageNumber = 1;
 
     GameObject mainCam;
     GameObject battleCam;
@@ -56,7 +57,10 @@ public class EncountZone : MonoBehaviour {
             {
                 gm.stateCount = 4;
             }
-            gm.battleCount = EncountNumber;
+            if(stageNumber == 1)
+            {
+                gm.battleCount = encountNumber;
+            }
             Destroy(this.gameObject);
         }
         
@@ -64,7 +68,7 @@ public class EncountZone : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-       if(col.gameObject.tag == ("Player") && EncFlag == true && EncountNumber - gm.stateCount == 1)
+        if (col.gameObject.tag == ("Player") && EncFlag == true && encountNumber - gm.stateCount == 1)
         {
             Debug.Log("hit");
             EncFlag = false;
@@ -74,8 +78,9 @@ public class EncountZone : MonoBehaviour {
             EnemyEncounter();
             PlayerMove playerMove = col.GetComponent<PlayerMove>();
             playerMove.encountPos = transform.position;
+            
         }
-      //  Debug.Log("これはいい大根");
+        //  Debug.Log("これはいい大根");
     }
 
 

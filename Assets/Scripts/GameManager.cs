@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public int doorImgCount = 0;
     public int hintNum = 0;
     public static int sceneNumber = 0;
+    public int tutorialState = 0;
 
     public static int getSceneNumber()
     {
