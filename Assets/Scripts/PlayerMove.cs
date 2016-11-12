@@ -142,8 +142,8 @@ public class PlayerMove : MonoBehaviour {
             CameraForward = Camera.main.transform.TransformDirection(Vector3.forward);
             //カメラ横方向取得
             CameraRight = Camera.main.transform.TransformDirection(Vector3.right);
-        
 
+        animator.SetBool("isRunning", false); //走るアニメーションオフ
 
 
         if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0 && guardFlag == false && playerShoot.attack == false)
@@ -290,6 +290,7 @@ public class PlayerMove : MonoBehaviour {
     {
         if (Input.GetAxis("Guard") == 1)
         {
+         
             Debug.Log(Input.GetAxis("Guard"));
             guardFlag = true;
             guardTime++;
