@@ -6,7 +6,7 @@ public class TalkSettings : MonoBehaviour
     public int startTalkNum = 0;
 
     TalkProcess talk;
-    int count = 0;
+    public int count = 0;
 
 
     void Start()

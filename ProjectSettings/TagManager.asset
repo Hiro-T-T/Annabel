@@ -11,6 +11,7 @@ TagManager:
   - TalkTrigger
   - GM
   - Stage
+  - EndImg
   layers:
   - Default
   - TransparentFX
