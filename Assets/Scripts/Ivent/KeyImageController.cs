@@ -2,22 +2,20 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class DoorImageController : MonoBehaviour {
+public class KeyImageController : MonoBehaviour {
 
     public DoorController door;
     GameManager gm;
     string doorObj = "";
     public bool ImgOn = true;
     int stage = 0;
-    int doorCount;
+    int doorCount = 0;
 
     public enum DoorState
     {
-        Red,
-        Blue,
         Right,
         Left,
-        Stage1_Blue
+        Rock
     }
 
     public DoorState doorState;
@@ -26,32 +24,20 @@ public class DoorImageController : MonoBehaviour {
     {
         switch (doorState)
         {
-            case DoorState.Red:
-                doorObj = "RedDoor";
-                stage = 0;
-                break;
-            case DoorState.Blue:
-                doorObj = "BlueDoor";
-                stage = 0;
-                break;
             case DoorState.Right:
-                doorObj = "RightDoor";
                 stage = 1;
                 doorCount = 1;
                 break;
             case DoorState.Left:
-                doorObj = "LeftDoor";
                 stage = 1;
                 doorCount = 2;
                 break;
-            case DoorState.Stage1_Blue:
-                doorObj = "BlueDoor";
+            case DoorState.Rock:
                 stage = 1;
-                doorCount = 4;
+                doorCount = 3;
                 break;
         }
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
-        door = GameObject.Find(doorObj).GetComponent<DoorController>();
         ImgOn = true;
         gameObject.GetComponent<Image>().enabled = false;
 
@@ -60,14 +46,23 @@ public class DoorImageController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (door.open == true && ImgOn == true && stage == 0)
+        if (gm.stateCount == doorCount && ImgOn == true && stage == 1)
         {
             gameObject.GetComponent<Image>().enabled = true;
-            Invoke("ImgOff", 1.0F);
-        }
-        if (gm.stateCount == doorCount && ImgOn == true && stage == 1 && gm.doorImgCount == doorCount)
-        {
-            gameObject.GetComponent<Image>().enabled = true;
+            
+            switch (doorCount)
+            {
+                case 1:
+                    gm.hintNum = 1;
+                    break;
+                case 2:
+                    gm.hintNum = 3;
+                    break;
+                case 3:
+                    gm.hintNum = 4;
+                    break;
+            }
+                
             Invoke("ImgOff", 1.0F);
         }
     }
@@ -76,6 +71,6 @@ public class DoorImageController : MonoBehaviour {
     {
         ImgOn = false;
         gameObject.GetComponent<Image>().enabled = false;
-        
+
     }
 }

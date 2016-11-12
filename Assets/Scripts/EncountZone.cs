@@ -52,7 +52,11 @@ public class EncountZone : MonoBehaviour {
       if(EncFlag == false && flagsInStageManager.batleMode == false && BattleCount == false)
         {
             BattleCount = true;
-            gm.stateCount = EncountNumber;
+            if(gm.battleCount >= 2)
+            {
+                gm.stateCount = 4;
+            }
+            gm.battleCount = EncountNumber;
             Destroy(this.gameObject);
         }
         
