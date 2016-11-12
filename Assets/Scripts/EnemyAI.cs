@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
-
+    private AudioSource se;
+    public AudioClip sound;
     GameObject player;    //プレイヤーを代入
     PlayerMove playerMove;
     public int hp = 3;
@@ -39,7 +40,8 @@ public class EnemyAI : MonoBehaviour {
             playerTransformPrevious = targetTransform;
         }
 
-
+        se = gameObject.GetComponent<AudioSource>();
+        se.loop = false;
 
         // count = GameObject.Find("GameManager").GetComponent<GameManager>().counter;
     }
@@ -175,10 +177,12 @@ public class EnemyAI : MonoBehaviour {
                 if(count > 1)
                 {
                     hitMove = -1;
-                   
 
+                    
                     if (playerMove.damageCount == 0)
                     {
+                        damage = 3;
+                        se.PlayOneShot(sound);
                         playerMove.hp -= damage;
                         playerMove.damageCount = 60;
                     }
@@ -195,17 +199,26 @@ public class EnemyAI : MonoBehaviour {
             Debug.Log("大根ガード");
             if (playerMove.guardTime < playerMove.guardCounterTime)
             {
-                playerMove.guardCounter = true;
-                playerMove.guardTime += 7;
+                if (count > 1 && moveMode == 1 && playerMove.damageCount == 0)
+                {
+                    playerMove.guardCounter = true;
+                    playerMove.guardTime += 7;
+                }
+        
             }
             else
             {
-                playerMove.hp -= damage * 0.5f;
+                if (playerMove.damageCount == 0 && count > 1 && moveMode == 1)
+                {
+                    playerMove.hp -= damage * 0.5f;
+                    playerMove.damageCount = 60;
+                }
+               
             }
 
             hitMove = -1;
         }
     }
-
+    
 
 }

@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class EncountZone : MonoBehaviour {
-
+    private AudioSource se;
+    public AudioClip sound;
     public GameObject[] enemy;
     FlagsInStageManager flagsInStageManager;
     private Vector3 pos = new Vector3(0.0f,0.0f,0.0f);
@@ -32,8 +33,9 @@ public class EncountZone : MonoBehaviour {
         canvasTargetControlObj = GameObject.Find("GameControlObject");
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
         battleCam = GameObject.Find("BattleCamera");
-
-
+        se = gameObject.GetComponent<AudioSource>();
+        se.loop = false;
+    
         childObject = gameObject.transform.FindChild("DistanceCheck").gameObject;
         childPos = childObject.transform.position;
         distancePos = (childPos - pos) * 2;
@@ -76,6 +78,7 @@ public class EncountZone : MonoBehaviour {
             flagsInStageManager.batleMode = true;
             encPop.encOn = true;
             EnemyEncounter();
+            se.PlayOneShot(sound);
             PlayerMove playerMove = col.GetComponent<PlayerMove>();
             playerMove.encountPos = transform.position;
             

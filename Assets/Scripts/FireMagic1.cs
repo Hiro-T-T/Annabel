@@ -12,8 +12,9 @@ public class FireMagic1 : MonoBehaviour {
    private Vector3 enemyDistance;
    private Vector3 enemyDistanceHalf;
    Vector3 bezierHalfPoint;
-
-   public int damage = 2;
+    public AudioClip audioClip;
+    AudioSource audioSource;
+    public int damage = 2;
     public float tAdd = 0.03f;
 
  //   float r = 
@@ -21,6 +22,8 @@ public class FireMagic1 : MonoBehaviour {
     float t = 0.0f;
 	// Use this for initialization
 	void Start () {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
         playerMove = GameObject.Find("player").GetComponent<PlayerMove>();
         pos = gameObject.transform.position;
         targetObj = playerMove.targetEnemyPosition;
@@ -41,6 +44,8 @@ public class FireMagic1 : MonoBehaviour {
         tamaPointDirection = Random.Range(-10.0f, 10.0f);
 
         bezierHalfPoint.z = Random.Range(playerTransform.z, enemyTransform.z) + tamaPointDirection;
+
+       
     }
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -67,6 +72,12 @@ public class FireMagic1 : MonoBehaviour {
         {
             EnemyAI enemyAI = col.GetComponent<EnemyAI>();
             enemyAI.hp -= damage;
+            GameObject SE = Resources.Load("EnemyDamageSe") as GameObject;
+            GameObject obj = GameObject.Instantiate(SE) as GameObject;
+            EnemyDamageSe enemyDamageSe = obj.GetComponent<EnemyDamageSe>();
+            enemyDamageSe.sound = audioClip;
+            
+            //audioSource.Play();
             Destroy(gameObject);
         }
     }
