@@ -3698,10 +3698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fa1705bde2abb4d8afebcc94f5a0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageRiseAddY: 2.5
+  stageRiseAddY: 4
   stageRiseRotateY: 2.5
   CameraDownDirection: 1
-  moveCameraDistance: 30
+  moveCameraDistance: 35
   battleCameraDistance: 1
   cameraPos: {x: 0, y: 0, z: 0}
   CameraRotate: {x: 0, y: 0, z: 0}
@@ -8295,6 +8295,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1848484748}
   - 20: {fileID: 1848484747}
+  - 45: {fileID: 1848484749}
   m_Layer: 0
   m_Name: Water4AdvancedReflectionMain Camera
   m_TagString: Untagged
@@ -8342,13 +8343,21 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1848484746}
-  m_LocalRotation: {x: 0.027686108, y: 0.9625661, z: 0.24721359, w: -0.10763597}
-  m_LocalPosition: {x: -41.56624, y: -19.566917, z: 14.794744}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000004371139}
+  m_LocalPosition: {x: 0.20288086, y: -13.504094, z: 46.923645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1551219197}
   m_RootOrder: 2
+--- !u!45 &1848484749
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848484746}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1 &1871156491
 GameObject:
   m_ObjectHideFlags: 0
