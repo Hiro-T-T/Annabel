@@ -2250,6 +2250,11 @@ Prefab:
       propertyPath: m_Name
       value: EncountArea3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010939379662, guid: 6e13197f7f7d1f94389895936f3750ba,
+        type: 2}
+      propertyPath: encountNumber
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e13197f7f7d1f94389895936f3750ba, type: 2}
   m_IsPrefabParent: 0
@@ -4114,6 +4119,11 @@ Prefab:
     - target: {fileID: 1000010641746670, guid: 6e13197f7f7d1f94389895936f3750ba, type: 2}
       propertyPath: m_Name
       value: EncountArea1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010939379662, guid: 6e13197f7f7d1f94389895936f3750ba,
+        type: 2}
+      propertyPath: encountNumber
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e13197f7f7d1f94389895936f3750ba, type: 2}
@@ -8017,6 +8027,11 @@ Prefab:
     - target: {fileID: 1000010641746670, guid: 6e13197f7f7d1f94389895936f3750ba, type: 2}
       propertyPath: m_Name
       value: EncountArea2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010939379662, guid: 6e13197f7f7d1f94389895936f3750ba,
+        type: 2}
+      propertyPath: encountNumber
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e13197f7f7d1f94389895936f3750ba, type: 2}
