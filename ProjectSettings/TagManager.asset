@@ -10,6 +10,7 @@ TagManager:
   - EnemyAtack
   - TalkTrigger
   - GM
+  - Stage
   layers:
   - Default
   - TransparentFX

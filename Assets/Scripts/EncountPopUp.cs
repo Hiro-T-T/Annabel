@@ -18,7 +18,7 @@ public class EncountPopUp : MonoBehaviour {
     void Update () {
         if (encOn == true)
         {
-            Debug.Log("aaaaaa");
+      //      Debug.Log("aaaaaa");
             gameObject.GetComponent<Image>().enabled = true;
             Invoke("Imageoff", 1.5f);
         }

@@ -75,7 +75,7 @@ public class EncountZone : MonoBehaviour {
 
             apeearX = Random.Range(childPos.x,MaxX);
             apeearZ = Random.Range(childPos.z,MaxZ);
-            GameObject.Instantiate(appearEnemy, new Vector3(apeearX, pos.y + 0.05f, apeearZ), Quaternion.identity);
+            GameObject.Instantiate(appearEnemy, new Vector3(apeearX, appearEnemy.transform.position.y, apeearZ), Quaternion.identity);
             i++;
         }
         

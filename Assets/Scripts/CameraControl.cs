@@ -102,7 +102,7 @@ public class CameraControl : MonoBehaviour {
                     dammyBattleCampos = transform.position;
                 }
                 angle = Mathf.Atan2(player.transform.position.z - player.targetEnemyPosition.transform.position.z, player.transform.position.x - player.targetEnemyPosition.transform.position.x) - 1.57f;
-                Debug.Log( battleCameraReadyTime );
+          //      Debug.Log( battleCameraReadyTime );
 
                 //回転値の調整
                 returnFlag = false;
@@ -136,7 +136,7 @@ public class CameraControl : MonoBehaviour {
                         //angle2 %= 6.28f ;
                         //lookAngle += ( angle2 - lookAngle )*moveSpeed ;
                         //lookAngle %= 6.28f ;
-                        Debug.Log("消えかかっただいこん" + lookAngle + " " + angle2);
+                    //    Debug.Log("消えかかっただいこん" + lookAngle + " " + angle2);
 
                     }
                     else if (-angle > 0.0f)
@@ -146,7 +146,7 @@ public class CameraControl : MonoBehaviour {
                         //angle2 %= 6.28f ;
                         //lookAngle += ( angle2 - lookAngle )*moveSpeed ;
                         //lookAngle %= 6.28f ;
-                        Debug.Log("消えかかれなかっただいこん" + lookAngle + " " + angle2);
+                    //    Debug.Log("消えかかれなかっただいこん" + lookAngle + " " + angle2);
                     }
 
                 }

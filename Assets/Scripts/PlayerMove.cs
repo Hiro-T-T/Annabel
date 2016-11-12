@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour {
     public float gravity = 0.02f;                                               //重力値
     public float jumppow = 1.0f;												//ジャンプ力
     public float moveFrictionPow = 0.3f;
-
+    public float damageCount = 0;
     bool playerInAirFlag = true;                                                //空中かどうか
     public bool pushKeyFlag = false;
     private int jumpCount = 5;
@@ -67,8 +67,14 @@ public class PlayerMove : MonoBehaviour {
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(transform.position);
         }
-        
-     //   Debug.Log(pos);
+
+        //   Debug.Log(pos);
+
+        damageCount -= 1;
+        if(damageCount <= 0)
+        {
+            damageCount = 0;
+        }
 
         if (hp <= 0)
         {
@@ -124,7 +130,7 @@ public class PlayerMove : MonoBehaviour {
         }
         
         
-        Debug.Log(guardCounter);
+     //   Debug.Log(guardCounter);
     }
     void FixedUpdate()
     {

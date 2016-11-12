@@ -108,7 +108,7 @@ public class FlagsInStageManager : MonoBehaviour {
             if(batleMode == false) cameraMode = true;
         }
         else cameraMode = false;
-        Debug.Log(cameraMode);
+    //    Debug.Log(cameraMode);
     }
 
     // Update is called once per frame

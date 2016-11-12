@@ -46,6 +46,7 @@ public class EnemyBullet : MonoBehaviour {
             if(playerMove.guardTime < playerMove.guardCounterTime)
             {
                 playerMove.guardCounter = true;
+                playerMove.guardTime += 7;
             }
             else
             {
