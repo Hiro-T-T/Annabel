@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class EnemyBullet : MonoBehaviour {
-
+    private AudioSource se;
+    public AudioClip sound;
     public float speed = 1.0f;
     public int lifeTime = 2;
     int second = 0;
@@ -14,6 +15,9 @@ public class EnemyBullet : MonoBehaviour {
     public Vector3 targetFoward;
     void Start()
     {
+        se = gameObject.GetComponent<AudioSource>();
+        se.loop = false;
+        se.PlayOneShot(sound);
         second = 0;
         counter = 0;
         player = GameObject.FindGameObjectWithTag("Player");

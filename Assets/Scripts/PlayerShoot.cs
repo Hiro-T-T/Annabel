@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerShoot : MonoBehaviour {
     private AudioSource se;
-  //  public AudioClip sound;
+    public AudioClip sound;
     private GameObject bullet;
    private GameObject trg;
     public float speed = 1000f;
@@ -37,8 +37,8 @@ public class PlayerShoot : MonoBehaviour {
         //cameracontrol = camera_s.GetComponent<CameraControl>();
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
         animator = GetComponent<Animator>();
-     //   se = gameObject.GetComponent<AudioSource>();
-     //   se.loop = false;
+        se = gameObject.GetComponent<AudioSource>();
+        se.loop = false;
         bullet = Resources.Load("FireMagic1") as GameObject;
     }
 
@@ -101,7 +101,7 @@ public class PlayerShoot : MonoBehaviour {
         for (int i = 0; i < 3; i++)
         {
             GameObject obj = GameObject.Instantiate(bullet) as GameObject;
-            //  se.PlayOneShot(sound);
+              se.PlayOneShot(sound);
             obj.transform.position = trg.transform.position;
             //   obj.GetComponent<Rigidbody>().AddForce(rifle.forward * speed);    //銃の向きが元から反転しているため、併せてforwardも反転させる
 
