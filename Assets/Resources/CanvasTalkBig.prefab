@@ -125,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 1000011421222350}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88fe6206fcdb0ec4782b1c5ae7cf705b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Serif \u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\na\na"
+  m_Text: 
 --- !u!114 &114000012714202830
 MonoBehaviour:
   m_ObjectHideFlags: 1
