@@ -26,14 +26,16 @@ public class HintController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        hintNumber = gm.stateCount;
+        
         switch (stageType)
         {
             case StageType.Tutorial:
+                hintNumber = gm.stateCount;
                 // hintNumber = 1;
                 TutorialHint();
                 break;
             case StageType.Stage1:
+                hintNumber = gm.hintNum;
                 // hintNumber = 2;
                 Stage1Hint();
                 break;
@@ -77,7 +79,27 @@ public class HintController : MonoBehaviour {
 
     void Stage1Hint()
     {
-
+        switch(hintNumber)
+        {
+            case 0:
+                hintTxt.text = "まずは光の鍵を探そう";
+                break;
+            case 1:
+                hintTxt.text = "扉を開けよう";
+                break;
+            case 2:
+                hintTxt.text = "闇の鍵を探そう";
+                break;
+            case 3:
+                hintTxt.text = "魔導書を見つけよう";
+                break;
+            case 4:
+                hintTxt.text = "岩を壊そう";
+                break;
+            case 5:
+                hintTxt.text = "敵を倒して最後の扉を開こう";
+                break;
+        }
     }
 
 }

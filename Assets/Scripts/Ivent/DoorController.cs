@@ -68,13 +68,35 @@ public class DoorController : MonoBehaviour {
                     Destroy(this.gameObject);
                 }
                 break;
+        }
+	}
+
+    void OnTriggerStay(Collider col)
+    {
+        switch (stage)
+        {
             case 1:
-                if(gm.stateCount == doorCount)
+                if (col.gameObject.CompareTag("Player") && Input.GetAxis("Attack") == 1 && gm.stateCount == doorCount)
                 {
-                    Destroy(this.gameObject);
+                    if(doorCount == 1)
+                    {
+                        gm.hintNum = 2;
+                    }
+                    switch (doorCount)
+                    {
+                        case 1:
+                            gm.hintNum = 2;
+                            break;
+                        case 3:
+                            gm.hintNum = 5;
+                            break;
+                    }
+                    gm.doorImgCount = doorCount;
+                    Instantiate(Resources.Load("CounterMagic1"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                    Destroy(gameObject);
                 }
                 break;
         }
-	}
+    }
 
 }
