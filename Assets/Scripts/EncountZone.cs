@@ -13,6 +13,10 @@ public class EncountZone : MonoBehaviour {
     private float apeearX = 0.0f;
     private float apeearZ = 0.0f;
     public EncountPopUp encPop;
+    bool EncFlag = true;
+    bool BattleCount = false;
+    GameManager gm;
+    public int EncountNumber = 0;
 
     GameObject mainCam;
     GameObject battleCam;
@@ -20,6 +24,7 @@ public class EncountZone : MonoBehaviour {
     GameObject canvasTargetControlObj;
     // Use this for initialization
     void Start () {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         encPop = GameObject.Find("Encount").GetComponent<EncountPopUp>();
         pos = transform.position;
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
@@ -32,6 +37,7 @@ public class EncountZone : MonoBehaviour {
         childPos = childObject.transform.position;
         distancePos = (childPos - pos) * 2;
         distancePosQuarter = (childPos + (distancePos / 2));
+        EncFlag = true;
 	}
     void OnDrawGizmos()
     {
@@ -43,21 +49,27 @@ public class EncountZone : MonoBehaviour {
 
         Collider[] hit = Physics.OverlapBox(transform.position, distancePos);
       //  Debug.Log(distancePos.x);
-
+      if(EncFlag == false && flagsInStageManager.batleMode == false && BattleCount == false)
+        {
+            BattleCount = true;
+            gm.stateCount = EncountNumber;
+            Destroy(this.gameObject);
+        }
         
 	}
 
     void OnTriggerEnter(Collider col)
     {
-       if(col.gameObject.tag == ("Player"))
+       if(col.gameObject.tag == ("Player") && EncFlag == true && EncountNumber - gm.stateCount == 1)
         {
+            Debug.Log("hit");
+            EncFlag = false;
             canvasTargetControlObj.SendMessage("canvasTargetAppear");
             flagsInStageManager.batleMode = true;
             encPop.encOn = true;
             EnemyEncounter();
             PlayerMove playerMove = col.GetComponent<PlayerMove>();
             playerMove.encountPos = transform.position;
-            Destroy(this.gameObject);
         }
       //  Debug.Log("これはいい大根");
     }
