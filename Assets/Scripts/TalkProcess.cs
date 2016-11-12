@@ -71,7 +71,7 @@ public class TalkProcess : MonoBehaviour {
 	void Update ()
 	{
 			
-		if( Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space) ||
+		if(Input.GetAxis("Attack") == 1 || Input.GetKeyDown(KeyCode.Space) ||
 			Input.GetButtonDown("Submit") )
 		{
 			mouseButtonFlag[0] = true ;
@@ -161,7 +161,7 @@ public class TalkProcess : MonoBehaviour {
 			//	if( GameObject.Find("expression") != null ) faceImage = GameObject.Find("expression").GetComponent<Image>();
 				//faceImage.sprite = faceGraph[ talkClass[talkNum].drawFace[talkClass[talkNum].talkPlayNow] ] ;
 
-				if( mouseButtonFlag[0] == true )
+				if(Input.GetAxis("Attack") == 1)
 				{
 					talkClass[talkNum].talkTimeCount += 1.0f ;
 				}else {
