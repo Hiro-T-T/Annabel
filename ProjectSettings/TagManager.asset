@@ -8,6 +8,10 @@ TagManager:
   - Key
   - Target
   - EnemyAtack
+  - TalkTrigger
+  - GM
+  - Stage
+  - EndImg
   layers:
   - Default
   - TransparentFX
