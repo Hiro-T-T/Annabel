@@ -8,11 +8,15 @@ public class EffectControl : MonoBehaviour {
     private float time;
     public float timeEnd;
     public Vector3 pos;
-
+    private AudioSource se;
+    public AudioClip sound;
     ParticleSystem myParticleSystem;
     // Use this for initialization
    public void Awake()
     {
+        se = gameObject.GetComponent<AudioSource>();
+        se.loop = false;
+        se.PlayOneShot(sound);
         // playerMove = GameObject.Find("player").GetComponent<PlayerMove>();
         // pos = playerMove.targetEnemyPosition.transform.position;
         myParticleSystem = this.GetComponent<ParticleSystem>();

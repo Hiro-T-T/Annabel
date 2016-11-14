@@ -2,35 +2,35 @@
 using System.Collections;
 
 public class EnemyBullet : MonoBehaviour {
-
+    private AudioSource se;
+    public AudioClip sound;
     public float speed = 1.0f;
     public int lifeTime = 2;
     int second = 0;
-    int counter = 0;
+    float counter = 0;
     public float damage = 2;
     private GameObject player;
     private PlayerMove playerMove;
     FlagsInStageManager flagsInStageManager;
+    public Vector3 targetFoward;
     void Start()
     {
+        se = gameObject.GetComponent<AudioSource>();
+        se.loop = false;
+        se.PlayOneShot(sound);
         second = 0;
         counter = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         playerMove = player.GetComponent<PlayerMove>();
         flagsInStageManager = GameObject.Find("GameControlObject").GetComponent<FlagsInStageManager>();
+        
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        second++;
-        float step = Time.deltaTime * speed;
-        
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
-        if(second > 60)
-        {
-            second = 0;
-            counter++;
-        }
+        counter += Time.deltaTime;
+        transform.position += targetFoward * Time.deltaTime * speed;
+        transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
         if(counter > lifeTime || flagsInStageManager.batleMode == false)
         {
             Destroy(gameObject);
@@ -50,6 +50,7 @@ public class EnemyBullet : MonoBehaviour {
             if(playerMove.guardTime < playerMove.guardCounterTime)
             {
                 playerMove.guardCounter = true;
+                playerMove.guardTime += 7;
             }
             else
             {

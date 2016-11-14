@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour {
 
     public float hp = 10.0f;
     public bool guardFlag = false;
-
+    public Quaternion q;
     public float moveSpeed = 0.3f;                                              //地上時移動速度
     public float movePowInAir = 0.02f;                                          //空中での移動にかかる強さ
     public float moveMaxInAir = 0.3f;                                           //空中での感性限界値
     public float gravity = 0.02f;                                               //重力値
     public float jumppow = 1.0f;												//ジャンプ力
     public float moveFrictionPow = 0.3f;
-
+    public float damageCount = 0;
     bool playerInAirFlag = true;                                                //空中かどうか
-
+    public bool pushKeyFlag = false;
     private int jumpCount = 5;
     FlagsInStageManager flagsInStageManager;
 
@@ -63,12 +64,23 @@ public class PlayerMove : MonoBehaviour {
 
     void Update()
     {
-        Vector2 pos = Camera.main.ScreenToWorldPoint(transform.position);
-     //   Debug.Log(pos);
+        if(flagsInStageManager.batleMode == false)
+        {
+            Vector2 pos = Camera.main.ScreenToWorldPoint(transform.position);
+        }
+
+        //   Debug.Log(pos);
+
+        damageCount -= 1;
+        if(damageCount <= 0)
+        {
+            damageCount = 0;
+        }
 
         if (hp <= 0)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene(6);
         }
 
         moveDirection.y = 0.0f;
@@ -120,22 +132,23 @@ public class PlayerMove : MonoBehaviour {
         }
         
         
-        Debug.Log(guardCounter);
+     //   Debug.Log(guardCounter);
     }
     void FixedUpdate()
     {
-        bool pushKeyFlag = false;
+        pushKeyFlag = false;
         //カメラ正面方向取得
 
             CameraForward = Camera.main.transform.TransformDirection(Vector3.forward);
             //カメラ横方向取得
             CameraRight = Camera.main.transform.TransformDirection(Vector3.right);
-        
+
+        animator.SetBool("isRunning", false); //走るアニメーションオフ
 
 
-
-        if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0 && guardFlag == false)
+        if (flagsInStageManager.gameClear == false && flagsInStageManager.gameOver == false && flagsInStageManager.talkMode != 0 && guardFlag == false && playerShoot.attack == false)
         {
+            animator.SetBool("isRunning", false);
             if (playerInAirFlag == false)
             {
                 jumpCount = 0;
@@ -176,11 +189,11 @@ public class PlayerMove : MonoBehaviour {
             {
 
                 //   moveDirection += (moveDirection.normalized * moveSpeed) / 50;
-              //  animator.SetBool("isRunning", true); //走るアニメーションオン
+              animator.SetBool("isRunning", true); //走るアニメーションオン
             }
             else
             {
-              //  animator.SetBool("isRunning", false); //走るアニメーションオフ
+              animator.SetBool("isRunning", false); //走るアニメーションオフ
             }
             /*
             //慣性制限
@@ -204,7 +217,7 @@ public class PlayerMove : MonoBehaviour {
             {
                 if (flagsInStageManager.cameraMode == false)
                 {
-                    Quaternion q = Quaternion.LookRotation(moveDirection);
+                    q = Quaternion.LookRotation(moveDirection);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 20.0f);
                 }
             }
@@ -277,6 +290,7 @@ public class PlayerMove : MonoBehaviour {
     {
         if (Input.GetAxis("Guard") == 1)
         {
+         
             Debug.Log(Input.GetAxis("Guard"));
             guardFlag = true;
             guardTime++;

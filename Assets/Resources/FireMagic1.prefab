@@ -125,7 +125,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!82 &82000011771775824
 AudioSource:
@@ -136,7 +136,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7bc4e97bcf508974fbb8eb1dbf17f3d7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: aa231ff50593df744b26d2f0338d08ba, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -212,8 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ddf2abec2b522245aaef996c17ed99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: aa231ff50593df744b26d2f0338d08ba, type: 3}
   damage: 2
-  tAdd: 0.03
+  tAdd: 0.1
 --- !u!135 &135000012778407436
 SphereCollider:
   m_ObjectHideFlags: 1
