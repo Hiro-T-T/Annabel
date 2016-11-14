@@ -15,6 +15,14 @@ public class OperatingManager : MonoBehaviour {
         ok.Select();
     }
 
+    void Update()
+    {
+        if(Input.GetAxis("Attack") == 1)
+        {
+            SceneManager.LoadScene(2);
+        }
+    }
+
     public void OnClick()
     {
         SceneManager.LoadScene(2);
